@@ -5,9 +5,9 @@ FROM nvidia/cuda:10.0-devel-ubuntu18.04
 ENV NCCL_VERSION=2.4.2-1+cuda10.0
 ENV MXNET_URL=mxnet-cu100
 # Set MOFED directory, image and working directory
-ENV MOFED_DIR MLNX_OFED_LINUX-4.7-1.0.1.1-ubuntu18.04-x86_64
-ENV MOFED_SITE_PLACE MLNX_OFED-4.7-1.0.1.1
-ENV MOFED_IMAGE MLNX_OFED_LINUX-4.7-1.0.1.1-ubuntu18.04-x86_64.tgz
+ENV MOFED_DIR MLNX_OFED_LINUX-4.7-1.0.0.1-ubuntu18.04-x86_64
+ENV MOFED_SITE_PLACE MLNX_OFED-4.7-1.0.0.1
+ENV MOFED_IMAGE MLNX_OFED_LINUX-4.7-1.0.0.1-ubuntu18.04-x86_64.tgz
 
 RUN apt-get update
 RUN apt-get -y install apt-utils
