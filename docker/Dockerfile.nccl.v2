@@ -1,8 +1,6 @@
+FROM nvidia/cuda:10.1-devel-ubuntu18.04
 
-
-FROM nvidia/cuda:10.0-devel-ubuntu18.04
-
-ENV NCCL_VERSION=2.4.2-1+cuda10.0
+ENV NCCL_VERSION=2.4.8-1+cuda10.1
 ENV MXNET_URL=mxnet-cu100
 # Set MOFED directory, image and working directory
 ENV MOFED_DIR MLNX_OFED_LINUX-4.7-1.0.0.1-ubuntu18.04-x86_64
@@ -46,7 +44,7 @@ RUN mkdir /tmp/openmpi && \
         ldconfig && \
         rm -rf /tmp/openmpi
 
-# Download and install Mellanox OFED 4.6-1.0.1.1 for Ubuntu 16.04
+# Download and install Mellanox OFED 4.7-1.0.1.1 for Ubuntu 18.04
 RUN wget http://content.mellanox.com/ofed/${MOFED_SITE_PLACE}/${MOFED_IMAGE} && \
         tar -xzvf ${MOFED_IMAGE} && \
         ${MOFED_DIR}/mlnxofedinstall --user-space-only --without-fw-update -q && \
@@ -80,11 +78,11 @@ RUN cat /etc/ssh/ssh_config | grep -v StrictHostKeyChecking > /etc/ssh/ssh_confi
         mv /etc/ssh/ssh_config.new /etc/ssh/ssh_config
 
 # Build NCCL tests
-ENV NCCL_TESTS_COMMITISH=cbe7f65400
-WORKDIR /root/nccl_tests
-RUN wget -q -O - https://github.com/NVIDIA/nccl-tests/archive/${NCCL_TESTS_COMMITISH}.tar.gz | tar --strip-components=1 -xzf - \
-    && make MPI=1 &&\
-    cp /root/nccl_tests/build/* /usr/local/bin/
+RUN git clone https://github.com/NVIDIA/nccl-tests.git && \
+    cd nccl-tests && \
+    make MPI=1 && \
+    cp ./build/* /usr/local/bin/
+
 RUN ldconfig
 
 CMD ["/bin/bash"]
