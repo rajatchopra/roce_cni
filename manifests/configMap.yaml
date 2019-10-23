@@ -11,28 +11,28 @@ data:
                 "resourceName": "mlnx_sriov_rdma1",
                 "isRdma": true,
                 "selectors": {
-                    "pfNames": ["enp5s0"]
+                    "pfNames": ["enp5s0#0-0"]
                 }
             },
             {
                 "resourceName": "mlnx_sriov_rdma2",
                 "isRdma": true,
                 "selectors": {
-                    "pfNames": ["enp12s0"]
+                    "pfNames": ["enp12s0#0-0"]
                 }
             },
             {
                 "resourceName": "mlnx_sriov_rdma3",
                 "isRdma": true,
                 "selectors": {
-                    "pfNames": ["enp132s0"]
+                    "pfNames": ["enp132s0#0-0"]
                 }
             },
             {
                 "resourceName": "mlnx_sriov_rdma4",
                 "isRdma": true,
                 "selectors": {
-                    "pfNames": ["enp139s0"]
+                    "pfNames": ["enp139s0#0-0"]
                 }
             }
         ]

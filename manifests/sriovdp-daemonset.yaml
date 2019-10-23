@@ -33,7 +33,7 @@ spec:
       containers:
       - name: kube-sriovdp
         image: rajatchopra/sriov-device-plugin:inuse
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         args:
         - --log-dir=sriovdp
         - --log-level=10
