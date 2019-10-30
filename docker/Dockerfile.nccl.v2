@@ -1,15 +1,22 @@
-FROM nvidia/cuda:10.1-devel-ubuntu18.04
+FROM nvidia/cuda:10.0-devel-ubuntu18.04
 
-ENV NCCL_VERSION=2.4.8-1+cuda10.1
+ENV NCCL_VERSION=2.4.8-1+cuda10.0
 ENV MXNET_URL=mxnet-cu100
 # Set MOFED directory, image and working directory
 ENV MOFED_DIR MLNX_OFED_LINUX-4.7-1.0.0.1-ubuntu18.04-x86_64
 ENV MOFED_SITE_PLACE MLNX_OFED-4.7-1.0.0.1
 ENV MOFED_IMAGE MLNX_OFED_LINUX-4.7-1.0.0.1-ubuntu18.04-x86_64.tgz
 
-RUN apt-get update
-RUN apt-get -y install apt-utils
-RUN apt-get install -y --allow-downgrades --allow-change-held-packages --no-install-recommends \
+# Add Tensorflow
+ENV TENSORFLOW_VERSION=1.13.1
+ENV PYTORCH_VERSION=1.1.0
+ENV CUDNN_VERSION=7.5.1.10-1+cuda10.0
+
+ARG python=3.5
+ENV PYTHON_VERSION=${python}
+
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
+RUN apt-get update && apt-get install -y --allow-downgrades --allow-change-held-packages --no-install-recommends \
         build-essential \
         cmake \
         git \
@@ -29,8 +36,26 @@ RUN apt-get install -y --allow-downgrades --allow-change-held-packages --no-inst
         libnuma1 \
         lsof \
         libnccl2=${NCCL_VERSION} \
-        libnccl-dev=${NCCL_VERSION} && \
-        rm -rf /var/lib/apt/lists/*
+        libnccl-dev=${NCCL_VERSION} \
+	libcudnn7=${CUDNN_VERSION} \
+	libjpeg-dev \
+        libpng-dev \
+	software-properties-common
+
+RUN add-apt-repository ppa:deadsnakes/ppa && \
+    apt-get update && \
+    apt-get install -y g++-4.8 \
+    python${PYTHON_VERSION} \
+    python${PYTHON_VERSION}-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN ln -s /usr/bin/python${PYTHON_VERSION} /usr/bin/python
+RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
+    python get-pip.py && \
+    rm get-pip.py
+
+# Install TensorFlow, Keras, PyTorch and MXNet
+RUN pip install 'numpy<1.15.0' tensorflow-gpu==${TENSORFLOW_VERSION} keras h5py torch==${PYTORCH_VERSION} torchvision ${MXNET_URL}
 
 # Install Open MPI
 RUN mkdir /tmp/openmpi && \
@@ -52,6 +77,10 @@ RUN wget http://content.mellanox.com/ofed/${MOFED_SITE_PLACE}/${MOFED_IMAGE} && 
         rm -rf ${MOFED_DIR} && \
         rm -rf *.tgz
 
+# Install Horovod, temporarily using CUDA stubs
+RUN ldconfig /usr/local/cuda-10.0/targets/x86_64-linux/lib/stubs && \
+    HOROVOD_GPU_ALLREDUCE=NCCL HOROVOD_NCCL_INCLUDE=/usr/include HOROVOD_NCCL_LIB=/usr/lib/x86_64-linux-gnu HOROVOD_NCCL_LINK=SHARED HOROVOD_WITH_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 HOROVOD_WITH_MXNET=1 pip install --no-cache-dir horovod && \
+    ldconfig
 
 # Create a wrapper for OpenMPI to allow running as root by default
 RUN mv /usr/local/bin/mpirun /usr/local/bin/mpirun.real && \
@@ -82,6 +111,18 @@ RUN git clone https://github.com/NVIDIA/nccl-tests.git && \
     cd nccl-tests && \
     make MPI=1 && \
     cp ./build/* /usr/local/bin/
+
+# Download examples
+RUN apt-get install -y --no-install-recommends subversion && \
+    svn checkout https://github.com/horovod/horovod/trunk/examples && \
+    rm -rf /examples/.svn
+WORKDIR "/examples"
+
+# TF 1.13 benchmarks install and configure
+RUN git clone https://github.com/tensorflow/benchmarks.git && \
+    cd benchmarks/ && \
+    git checkout cnn_tf_v1.13_compatible
+WORKDIR "/examples/benchmarks"
 
 RUN ldconfig
 
