@@ -70,10 +70,5 @@ spec:
                 nvidia.com/gpu: 8
                 cpu: 64
                 memory: 64000Mi
-            env:
-            - name: NCCL_IB_DISABLE
-              value: "0"
-            - name: NCCL_NET_GDR_LEVEL
-              value: "0"
           imagePullSecrets:
           - name: regcred

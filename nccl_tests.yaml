@@ -1,0 +1,74 @@
+apiVersion: kubeflow.org/v1alpha2
+kind: MPIJob
+metadata:
+  name: rocetest
+spec:
+  cleanPodPolicy: Running
+  mpiReplicaSpecs:
+    Launcher:
+      replicas: 1
+      template:
+        metadata:
+          annotations:
+            k8s.v1.cni.cncf.io/networks: "sriov-net1,sriov-net2,sriov-net3,sriov-net4"
+        spec:
+          containers:
+          - image: rajatchopra/nccl_tests:v2
+            imagePullPolicy: Always
+            name: rocetest
+            #command: ["/bin/bash", "-c", "mpirun --allow-run-as-root --mca plm_rsh_no_tree_spawn 1 -n 4 --pernode /nccl-tests-master/build/all_reduce_perf -b 8 -e 128M -f 2 -g 8 -c 0"]
+            command: ["/bin/bash", "-c", "sleep infinity"]
+            securityContext:
+              privileged: true
+            resources:
+              requests:
+                intel.com/mlnx_sriov_rdma1: '1'
+                intel.com/mlnx_sriov_rdma2: '1'
+                intel.com/mlnx_sriov_rdma3: '1'
+                intel.com/mlnx_sriov_rdma4: '1'
+                nvidia.com/gpu: 8
+                cpu: 64
+                memory: 64000Mi
+              limits:
+                intel.com/mlnx_sriov_rdma1: '1'
+                intel.com/mlnx_sriov_rdma2: '1'
+                intel.com/mlnx_sriov_rdma3: '1'
+                intel.com/mlnx_sriov_rdma4: '1'
+                nvidia.com/gpu: 8
+                cpu: 64
+                memory: 64000Mi
+          imagePullSecrets:
+          - name: regcred
+    Worker:
+      replicas: 4
+      template:
+        metadata:
+          annotations:
+            k8s.v1.cni.cncf.io/networks: "sriov-net1,sriov-net2,sriov-net3,sriov-net4"
+        spec:
+          containers:
+          - image: rajatchopra/nccl_tests:v2
+            imagePullPolicy: Always
+            #- image: stg.nvcr.io/ooxy7dyak7dq/multinode_nccl_tests:0.01 
+            name: rocetest
+            securityContext:
+              privileged: true
+            resources:
+              requests:
+                intel.com/mlnx_sriov_rdma1: '1'
+                intel.com/mlnx_sriov_rdma2: '1'
+                intel.com/mlnx_sriov_rdma3: '1'
+                intel.com/mlnx_sriov_rdma4: '1'
+                nvidia.com/gpu: 8
+                cpu: 64
+                memory: 64000Mi
+              limits:
+                intel.com/mlnx_sriov_rdma1: '1'
+                intel.com/mlnx_sriov_rdma2: '1'
+                intel.com/mlnx_sriov_rdma3: '1'
+                intel.com/mlnx_sriov_rdma4: '1'
+                nvidia.com/gpu: 8
+                cpu: 64
+                memory: 64000Mi
+          imagePullSecrets:
+          - name: regcred
