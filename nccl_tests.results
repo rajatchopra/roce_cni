@@ -1,0 +1,899 @@
+ngc-auth-ldap-rajatc@cpu0481:~/src/github.com/rajatchopra/roce_cni$ kubectl get pods -o wide
+NAME                      READY   STATUS    RESTARTS   AGE   IP             NODE      NOMINATED NODE   READINESS GATES
+rocetest-launcher-csr45   1/1     Running   0          14m   10.233.76.5    dgx0106   <none>           <none>
+rocetest-worker-0         1/1     Running   0          14m   10.233.70.10   dgx0097   <none>           <none>
+rocetest-worker-1         1/1     Running   0          14m   10.233.69.4    dgx0098   <none>           <none>
+rocetest-worker-2         1/1     Running   0          14m   10.233.65.7    dgx0095   <none>           <none>
+rocetest-worker-3         1/1     Running   0          14m   10.233.78.13   dgx0108   <none>           <none>
+ngc-auth-ldap-rajatc@cpu0481:~/src/github.com/rajatchopra/roce_cni$ kubectl exec -it rocetest-launcher-csr45 /bin/bash
+root@rocetest-launcher-csr45:/# mpirun --allow-run-as-root --np 4 -npernode 1 -x NCCL_IB_HCA=mlx5_4,mlx5_6,mlx5_8,mlx5_10  /usr/local/bin/all_reduce_perf -b 64M -e 1G -f 2 -g 8
+[rocetest-launcher-csr45:00016] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-launcher-csr45:00016] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-launcher-csr45:00016] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-launcher-csr45:00016] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-launcher-csr45:00016] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-launcher-csr45:00016] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-launcher-csr45:00016] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-launcher-csr45:00016] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
++ POD_NAME=rocetest-worker-2
++ shift
++ /opt/kube/kubectl exec rocetest-worker-2 -- /bin/sh -c     PATH=/usr/local/bin:$PATH ; export PATH ; LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH ; export LD_LIBRARY_PATH ; DYLD_LIBRARY_PATH=/usr/local/lib:$DYLD_LIBRARY_PATH ; export DYLD_LIBRARY_PATH ;   /usr/local/bin/orted -mca ess "env" -mca ess_base_jobid "3838246912" -mca ess_base_vpid 3 -mca ess_base_num_procs "5" -mca orte_node_regex "rocetest-launcher-csr[2:45],rocetest-worker-[1:0-3]@0(5)" -mca orte_hnp_uri "3838246912.0;tcp://10.233.76.5:46911" -mca plm "rsh" --tree-spawn -mca orte_parent_uri "3838246912.0;tcp://10.233.76.5:46911" -mca orte_default_hostfile "/etc/mpi/hostfile" -mca plm_rsh_agent "/etc/mpi/kubexec.sh" -mca rmaps_ppr_n_pernode "1" -mca pmix "^s1,s2,cray,isolated"
++ POD_NAME=rocetest-worker-3
++ shift
++ /opt/kube/kubectl exec rocetest-worker-3 -- /bin/sh -c     PATH=/usr/local/bin:$PATH ; export PATH ; LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH ; export LD_LIBRARY_PATH ; DYLD_LIBRARY_PATH=/usr/local/lib:$DYLD_LIBRARY_PATH ; export DYLD_LIBRARY_PATH ;   /usr/local/bin/orted -mca ess "env" -mca ess_base_jobid "3838246912" -mca ess_base_vpid 4 -mca ess_base_num_procs "5" -mca orte_node_regex "rocetest-launcher-csr[2:45],rocetest-worker-[1:0-3]@0(5)" -mca orte_hnp_uri "3838246912.0;tcp://10.233.76.5:46911" -mca plm "rsh" --tree-spawn -mca orte_parent_uri "3838246912.0;tcp://10.233.76.5:46911" -mca orte_default_hostfile "/etc/mpi/hostfile" -mca plm_rsh_agent "/etc/mpi/kubexec.sh" -mca rmaps_ppr_n_pernode "1" -mca pmix "^s1,s2,cray,isolated"
++ POD_NAME=rocetest-worker-0
++ shift
++ /opt/kube/kubectl exec rocetest-worker-0 -- /bin/sh -c     PATH=/usr/local/bin:$PATH ; export PATH ; LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH ; export LD_LIBRARY_PATH ; DYLD_LIBRARY_PATH=/usr/local/lib:$DYLD_LIBRARY_PATH ; export DYLD_LIBRARY_PATH ;   /usr/local/bin/orted -mca ess "env" -mca ess_base_jobid "3838246912" -mca ess_base_vpid 1 -mca ess_base_num_procs "5" -mca orte_node_regex "rocetest-launcher-csr[2:45],rocetest-worker-[1:0-3]@0(5)" -mca orte_hnp_uri "3838246912.0;tcp://10.233.76.5:46911" -mca plm "rsh" --tree-spawn -mca orte_parent_uri "3838246912.0;tcp://10.233.76.5:46911" -mca orte_default_hostfile "/etc/mpi/hostfile" -mca plm_rsh_agent "/etc/mpi/kubexec.sh" -mca rmaps_ppr_n_pernode "1" -mca pmix "^s1,s2,cray,isolated"
++ POD_NAME=rocetest-worker-1
++ shift
++ /opt/kube/kubectl exec rocetest-worker-1 -- /bin/sh -c     PATH=/usr/local/bin:$PATH ; export PATH ; LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH ; export LD_LIBRARY_PATH ; DYLD_LIBRARY_PATH=/usr/local/lib:$DYLD_LIBRARY_PATH ; export DYLD_LIBRARY_PATH ;   /usr/local/bin/orted -mca ess "env" -mca ess_base_jobid "3838246912" -mca ess_base_vpid 2 -mca ess_base_num_procs "5" -mca orte_node_regex "rocetest-launcher-csr[2:45],rocetest-worker-[1:0-3]@0(5)" -mca orte_hnp_uri "3838246912.0;tcp://10.233.76.5:46911" -mca plm "rsh" --tree-spawn -mca orte_parent_uri "3838246912.0;tcp://10.233.76.5:46911" -mca orte_default_hostfile "/etc/mpi/hostfile" -mca plm_rsh_agent "/etc/mpi/kubexec.sh" -mca rmaps_ppr_n_pernode "1" -mca pmix "^s1,s2,cray,isolated"
+[rocetest-worker-1:00018] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-1:00018] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-1:00018] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-1:00018] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-2:00016] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-3:00016] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-0:00016] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-2:00016] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-0:00016] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-3:00016] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-2:00016] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-0:00016] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-3:00016] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-2:00016] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-3:00016] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-0:00016] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-1:00018] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-1:00018] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-1:00018] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-1:00018] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-2:00016] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-3:00016] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-2:00016] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-3:00016] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-2:00016] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-0:00016] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-3:00016] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-2:00016] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-0:00016] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-3:00016] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-0:00016] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-0:00016] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-1:00022] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-3:00020] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-0:00020] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-2:00020] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-3:00020] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-1:00022] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-0:00020] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-2:00020] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-3:00020] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-1:00022] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-0:00020] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-2:00020] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-3:00020] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-1:00022] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-0:00020] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-2:00020] opal_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-3:00020] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-1:00022] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-0:00020] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-2:00020] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-3:00020] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-1:00022] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-0:00020] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-3:00020] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-2:00020] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-1:00022] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-3:00020] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-0:00020] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-2:00020] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-1:00022] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-0:00020] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+[rocetest-worker-2:00020] pmix_ifinit: ioctl(SIOCGIFFLAGS) failed with errno=19
+# nThread 1 nGpus 8 minBytes 67108864 maxBytes 1073741824 step: 2(factor) warmup iters: 5 iters: 20 validation: 1 
+#
+# Using devices
+#   Rank  0 Pid     20 on rocetest-worker-0 device  0 [0x06] Tesla V100-SXM2-16GB-N
+#   Rank  1 Pid     20 on rocetest-worker-0 device  1 [0x07] Tesla V100-SXM2-16GB-N
+#   Rank  2 Pid     20 on rocetest-worker-0 device  2 [0x0a] Tesla V100-SXM2-16GB-N
+#   Rank  3 Pid     20 on rocetest-worker-0 device  3 [0x0b] Tesla V100-SXM2-16GB-N
+#   Rank  4 Pid     20 on rocetest-worker-0 device  4 [0x85] Tesla V100-SXM2-16GB-N
+#   Rank  5 Pid     20 on rocetest-worker-0 device  5 [0x86] Tesla V100-SXM2-16GB-N
+#   Rank  6 Pid     20 on rocetest-worker-0 device  6 [0x89] Tesla V100-SXM2-16GB-N
+#   Rank  7 Pid     20 on rocetest-worker-0 device  7 [0x8a] Tesla V100-SXM2-16GB-N
+#   Rank  8 Pid     22 on rocetest-worker-1 device  0 [0x06] Tesla V100-SXM2-16GB-N
+#   Rank  9 Pid     22 on rocetest-worker-1 device  1 [0x07] Tesla V100-SXM2-16GB-N
+#   Rank 10 Pid     22 on rocetest-worker-1 device  2 [0x0a] Tesla V100-SXM2-16GB-N
+#   Rank 11 Pid     22 on rocetest-worker-1 device  3 [0x0b] Tesla V100-SXM2-16GB-N
+#   Rank 12 Pid     22 on rocetest-worker-1 device  4 [0x85] Tesla V100-SXM2-16GB-N
+#   Rank 13 Pid     22 on rocetest-worker-1 device  5 [0x86] Tesla V100-SXM2-16GB-N
+#   Rank 14 Pid     22 on rocetest-worker-1 device  6 [0x89] Tesla V100-SXM2-16GB-N
+#   Rank 15 Pid     22 on rocetest-worker-1 device  7 [0x8a] Tesla V100-SXM2-16GB-N
+#   Rank 16 Pid     20 on rocetest-worker-2 device  0 [0x06] Tesla V100-SXM2-16GB-N
+#   Rank 17 Pid     20 on rocetest-worker-2 device  1 [0x07] Tesla V100-SXM2-16GB-N
+#   Rank 18 Pid     20 on rocetest-worker-2 device  2 [0x0a] Tesla V100-SXM2-16GB-N
+#   Rank 19 Pid     20 on rocetest-worker-2 device  3 [0x0b] Tesla V100-SXM2-16GB-N
+#   Rank 20 Pid     20 on rocetest-worker-2 device  4 [0x85] Tesla V100-SXM2-16GB-N
+#   Rank 21 Pid     20 on rocetest-worker-2 device  5 [0x86] Tesla V100-SXM2-16GB-N
+#   Rank 22 Pid     20 on rocetest-worker-2 device  6 [0x89] Tesla V100-SXM2-16GB-N
+#   Rank 23 Pid     20 on rocetest-worker-2 device  7 [0x8a] Tesla V100-SXM2-16GB-N
+#   Rank 24 Pid     20 on rocetest-worker-3 device  0 [0x06] Tesla V100-SXM2-16GB-N
+#   Rank 25 Pid     20 on rocetest-worker-3 device  1 [0x07] Tesla V100-SXM2-16GB-N
+#   Rank 26 Pid     20 on rocetest-worker-3 device  2 [0x0a] Tesla V100-SXM2-16GB-N
+#   Rank 27 Pid     20 on rocetest-worker-3 device  3 [0x0b] Tesla V100-SXM2-16GB-N
+#   Rank 28 Pid     20 on rocetest-worker-3 device  4 [0x85] Tesla V100-SXM2-16GB-N
+#   Rank 29 Pid     20 on rocetest-worker-3 device  5 [0x86] Tesla V100-SXM2-16GB-N
+#   Rank 30 Pid     20 on rocetest-worker-3 device  6 [0x89] Tesla V100-SXM2-16GB-N
+#   Rank 31 Pid     20 on rocetest-worker-3 device  7 [0x8a] Tesla V100-SXM2-16GB-N
+rocetest-worker-0:20:20 [0] NCCL INFO Bootstrap : Using [0]eth0:10.233.70.10<0> [1]enp5s0f1:10.148.22.32<0> [2]enp12s0f1:10.148.86.21<0> [3]enp132s0f1:10.148.150.21<0> [4]enp139s0f1:10.148.214.21<0>
+rocetest-worker-0:20:20 [0] NCCL INFO NET/Plugin : No plugin found (libnccl-net.so).
+rocetest-worker-0:20:20 [0] NCCL INFO NET/IB : Using [0]mlx5_6:1/RoCE [1]mlx5_8:1/RoCE [2]mlx5_10:1/RoCE [3]mlx5_4:1/RoCE ; OOB eth0:10.233.70.10<0>
+rocetest-worker-2:20:20 [0] NCCL INFO Bootstrap : Using [0]eth0:10.233.65.7<0> [1]enp5s0f1:10.148.22.28<0> [2]enp12s0f1:10.148.86.15<0> [3]enp132s0f1:10.148.150.15<0> [4]enp139s0f1:10.148.214.15<0>
+rocetest-worker-2:20:20 [0] NCCL INFO NET/Plugin : No plugin found (libnccl-net.so).
+NCCL version 2.4.8+cuda10.1
+rocetest-worker-1:22:22 [0] NCCL INFO Bootstrap : Using [0]eth0:10.233.69.4<0> [1]enp5s0f1:10.148.22.34<0> [2]enp12s0f1:10.148.86.24<0> [3]enp132s0f1:10.148.150.24<0> [4]enp139s0f1:10.148.214.24<0>
+rocetest-worker-1:22:22 [0] NCCL INFO NET/Plugin : No plugin found (libnccl-net.so).
+rocetest-worker-2:20:20 [0] NCCL INFO NET/IB : Using [0]mlx5_6:1/RoCE [1]mlx5_8:1/RoCE [2]mlx5_10:1/RoCE [3]mlx5_4:1/RoCE ; OOB eth0:10.233.65.7<0>
+rocetest-worker-1:22:22 [0] NCCL INFO NET/IB : Using [0]mlx5_6:1/RoCE [1]mlx5_8:1/RoCE [2]mlx5_10:1/RoCE [3]mlx5_4:1/RoCE ; OOB eth0:10.233.69.4<0>
+rocetest-worker-3:20:20 [0] NCCL INFO Bootstrap : Using [0]eth0:10.233.78.13<0> [1]enp5s0f1:10.148.22.54<0> [2]enp12s0f1:10.148.86.54<0> [3]enp132s0f1:10.148.150.54<0> [4]enp139s0f1:10.148.214.54<0>
+rocetest-worker-3:20:20 [0] NCCL INFO NET/Plugin : No plugin found (libnccl-net.so).
+rocetest-worker-0:20:37 [0] NCCL INFO Setting affinity for GPU 0 to 0fffff00,000fffff
+rocetest-worker-0:20:38 [1] NCCL INFO Setting affinity for GPU 1 to 0fffff00,000fffff
+rocetest-worker-2:20:36 [0] NCCL INFO Setting affinity for GPU 0 to 0fffff00,000fffff
+rocetest-worker-2:20:37 [1] NCCL INFO Setting affinity for GPU 1 to 0fffff00,000fffff
+rocetest-worker-0:20:39 [2] NCCL INFO Setting affinity for GPU 2 to 0fffff00,000fffff
+rocetest-worker-3:20:20 [0] NCCL INFO NET/IB : Using [0]mlx5_6:1/RoCE [1]mlx5_8:1/RoCE [2]mlx5_10:1/RoCE [3]mlx5_4:1/RoCE ; OOB eth0:10.233.78.13<0>
+rocetest-worker-1:22:38 [0] NCCL INFO Setting affinity for GPU 0 to 0fffff00,000fffff
+rocetest-worker-1:22:39 [1] NCCL INFO Setting affinity for GPU 1 to 0fffff00,000fffff
+rocetest-worker-2:20:38 [2] NCCL INFO Setting affinity for GPU 2 to 0fffff00,000fffff
+rocetest-worker-0:20:40 [3] NCCL INFO Setting affinity for GPU 3 to 0fffff00,000fffff
+rocetest-worker-1:22:40 [2] NCCL INFO Setting affinity for GPU 2 to 0fffff00,000fffff
+rocetest-worker-2:20:39 [3] NCCL INFO Setting affinity for GPU 3 to 0fffff00,000fffff
+rocetest-worker-3:20:36 [0] NCCL INFO Setting affinity for GPU 0 to 0fffff00,000fffff
+rocetest-worker-0:20:41 [4] NCCL INFO Setting affinity for GPU 4 to ffff,f00000ff,fff00000
+rocetest-worker-3:20:37 [1] NCCL INFO Setting affinity for GPU 1 to 0fffff00,000fffff
+rocetest-worker-1:22:41 [3] NCCL INFO Setting affinity for GPU 3 to 0fffff00,000fffff
+rocetest-worker-2:20:40 [4] NCCL INFO Setting affinity for GPU 4 to ffff,f00000ff,fff00000
+rocetest-worker-0:20:42 [5] NCCL INFO Setting affinity for GPU 5 to ffff,f00000ff,fff00000
+rocetest-worker-3:20:38 [2] NCCL INFO Setting affinity for GPU 2 to 0fffff00,000fffff
+rocetest-worker-1:22:42 [4] NCCL INFO Setting affinity for GPU 4 to ffff,f00000ff,fff00000
+rocetest-worker-2:20:41 [5] NCCL INFO Setting affinity for GPU 5 to ffff,f00000ff,fff00000
+rocetest-worker-3:20:39 [3] NCCL INFO Setting affinity for GPU 3 to 0fffff00,000fffff
+rocetest-worker-0:20:43 [6] NCCL INFO Setting affinity for GPU 6 to ffff,f00000ff,fff00000
+rocetest-worker-1:22:43 [5] NCCL INFO Setting affinity for GPU 5 to ffff,f00000ff,fff00000
+rocetest-worker-2:20:42 [6] NCCL INFO Setting affinity for GPU 6 to ffff,f00000ff,fff00000
+rocetest-worker-3:20:40 [4] NCCL INFO Setting affinity for GPU 4 to ffff,f00000ff,fff00000
+rocetest-worker-0:20:44 [7] NCCL INFO Setting affinity for GPU 7 to ffff,f00000ff,fff00000
+rocetest-worker-1:22:44 [6] NCCL INFO Setting affinity for GPU 6 to ffff,f00000ff,fff00000
+rocetest-worker-2:20:43 [7] NCCL INFO Setting affinity for GPU 7 to ffff,f00000ff,fff00000
+rocetest-worker-3:20:41 [5] NCCL INFO Setting affinity for GPU 5 to ffff,f00000ff,fff00000
+rocetest-worker-1:22:45 [7] NCCL INFO Setting affinity for GPU 7 to ffff,f00000ff,fff00000
+rocetest-worker-3:20:42 [6] NCCL INFO Setting affinity for GPU 6 to ffff,f00000ff,fff00000
+rocetest-worker-3:20:43 [7] NCCL INFO Setting affinity for GPU 7 to ffff,f00000ff,fff00000
+rocetest-worker-2:20:43 [7] NCCL INFO CUDA Dev 7[7], IB NIC distance :  SYS PHB PIX SYS
+rocetest-worker-3:20:38 [2] NCCL INFO CUDA Dev 2[2], IB NIC distance :  PIX SYS SYS PHB
+rocetest-worker-3:20:37 [1] NCCL INFO CUDA Dev 1[1], IB NIC distance :  PHB SYS SYS PIX
+rocetest-worker-1:22:40 [2] NCCL INFO CUDA Dev 2[2], IB NIC distance :  PIX SYS SYS PHB
+rocetest-worker-2:20:36 [0] NCCL INFO CUDA Dev 0[0], IB NIC distance :  PHB SYS SYS PIX
+rocetest-worker-2:20:37 [1] NCCL INFO CUDA Dev 1[1], IB NIC distance :  PHB SYS SYS PIX
+rocetest-worker-3:20:42 [6] NCCL INFO CUDA Dev 6[6], IB NIC distance :  SYS PHB PIX SYS
+rocetest-worker-1:22:38 [0] NCCL INFO CUDA Dev 0[0], IB NIC distance :  PHB SYS SYS PIX
+rocetest-worker-2:20:38 [2] NCCL INFO CUDA Dev 2[2], IB NIC distance :  PIX SYS SYS PHB
+rocetest-worker-2:20:39 [3] NCCL INFO CUDA Dev 3[3], IB NIC distance :  PIX SYS SYS PHB
+rocetest-worker-3:20:39 [3] NCCL INFO CUDA Dev 3[3], IB NIC distance :  PIX SYS SYS PHB
+rocetest-worker-2:20:40 [4] NCCL INFO CUDA Dev 4[4], IB NIC distance :  SYS PIX PHB SYS
+rocetest-worker-3:20:41 [5] NCCL INFO CUDA Dev 5[5], IB NIC distance :  SYS PIX PHB SYS
+rocetest-worker-3:20:40 [4] NCCL INFO CUDA Dev 4[4], IB NIC distance :  SYS PIX PHB SYS
+rocetest-worker-1:22:39 [1] NCCL INFO CUDA Dev 1[1], IB NIC distance :  PHB SYS SYS PIX
+rocetest-worker-2:20:41 [5] NCCL INFO CUDA Dev 5[5], IB NIC distance :  SYS PIX PHB SYS
+rocetest-worker-3:20:43 [7] NCCL INFO CUDA Dev 7[7], IB NIC distance :  SYS PHB PIX SYS
+rocetest-worker-2:20:42 [6] NCCL INFO CUDA Dev 6[6], IB NIC distance :  SYS PHB PIX SYS
+rocetest-worker-3:20:36 [0] NCCL INFO CUDA Dev 0[0], IB NIC distance :  PHB SYS SYS PIX
+rocetest-worker-1:22:41 [3] NCCL INFO CUDA Dev 3[3], IB NIC distance :  PIX SYS SYS PHB
+rocetest-worker-1:22:45 [7] NCCL INFO CUDA Dev 7[7], IB NIC distance :  SYS PHB PIX SYS
+rocetest-worker-1:22:43 [5] NCCL INFO CUDA Dev 5[5], IB NIC distance :  SYS PIX PHB SYS
+rocetest-worker-1:22:44 [6] NCCL INFO CUDA Dev 6[6], IB NIC distance :  SYS PHB PIX SYS
+rocetest-worker-1:22:42 [4] NCCL INFO CUDA Dev 4[4], IB NIC distance :  SYS PIX PHB SYS
+rocetest-worker-0:20:42 [5] NCCL INFO CUDA Dev 5[5], IB NIC distance :  SYS PIX PHB SYS
+rocetest-worker-0:20:41 [4] NCCL INFO CUDA Dev 4[4], IB NIC distance :  SYS PIX PHB SYS
+rocetest-worker-0:20:38 [1] NCCL INFO CUDA Dev 1[1], IB NIC distance :  PHB SYS SYS PIX
+rocetest-worker-0:20:39 [2] NCCL INFO CUDA Dev 2[2], IB NIC distance :  PIX SYS SYS PHB
+rocetest-worker-0:20:37 [0] NCCL INFO CUDA Dev 0[0], IB NIC distance :  PHB SYS SYS PIX
+rocetest-worker-0:20:40 [3] NCCL INFO CUDA Dev 3[3], IB NIC distance :  PIX SYS SYS PHB
+rocetest-worker-0:20:43 [6] NCCL INFO CUDA Dev 6[6], IB NIC distance :  SYS PHB PIX SYS
+rocetest-worker-0:20:44 [7] NCCL INFO CUDA Dev 7[7], IB NIC distance :  SYS PHB PIX SYS
+rocetest-worker-0:20:37 [0] NCCL INFO Channel 00 :    0   1   5   4   6   7   3  10   8   9  13  12  14  15  11  18  16  17  21  20
+rocetest-worker-0:20:37 [0] NCCL INFO Channel 01 :    0   2   1   3   7   6   5  12   8  10   9  11  15  14  13  20  16  18  17  19
+rocetest-worker-0:20:37 [0] NCCL INFO Channel 02 :    0   4   5   7  14  10  11   9   8  12  13  15  22  18  19  17  16  20  21  23
+rocetest-worker-0:20:37 [0] NCCL INFO Channel 03 :    0   3   2   6   4   7   5   1   8  11  10  14  12  15  13   9  16  19  18  22
+rocetest-worker-0:20:37 [0] NCCL INFO Channel 04 :    0   1   5   4   6   7   3  10   8   9  13  12  14  15  11  18  16  17  21  20
+rocetest-worker-0:20:37 [0] NCCL INFO Channel 05 :    0   2   1   3   7   6   5  12   8  10   9  11  15  14  13  20  16  18  17  19
+rocetest-worker-0:20:37 [0] NCCL INFO Channel 06 :    0   4   5   7  14  10  11   9   8  12  13  15  22  18  19  17  16  20  21  23
+rocetest-worker-0:20:37 [0] NCCL INFO Channel 07 :    0   3   2   6   4   7   5   1   8  11  10  14  12  15  13   9  16  19  18  22
+rocetest-worker-0:20:39 [2] NCCL INFO Ring 00 : 27 -> 2 [receive] via NET/IB/0/GDRDMA
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 00 : 11 -> 18 [receive] via NET/IB/0/GDRDMA
+rocetest-worker-1:22:40 [2] NCCL INFO Ring 00 : 3 -> 10 [receive] via NET/IB/0/GDRDMA
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 00 : 19 -> 26 [receive] via NET/IB/0/GDRDMA
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 00 : 18[2] -> 16[0] via P2P/direct pointer
+rocetest-worker-0:20:39 [2] NCCL INFO Ring 00 : 2[2] -> 0[0] via P2P/direct pointer
+rocetest-worker-1:22:40 [2] NCCL INFO Ring 00 : 10[2] -> 8[0] via P2P/direct pointer
+rocetest-worker-0:20:38 [1] NCCL INFO Ring 00 : 1[1] -> 5[5] via P2P/direct pointer
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 00 : 26[2] -> 24[0] via P2P/direct pointer
+rocetest-worker-2:20:41 [5] NCCL INFO Ring 00 : 21[5] -> 20[4] via P2P/direct pointer
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 00 : 20[4] -> 22[6] via P2P/direct pointer
+rocetest-worker-1:22:43 [5] NCCL INFO Ring 00 : 13[5] -> 12[4] via P2P/direct pointer
+rocetest-worker-0:20:37 [0] NCCL INFO Ring 00 : 0[0] -> 1[1] via P2P/direct pointer
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 00 : 22[6] -> 23[7] via P2P/direct pointer
+rocetest-worker-2:20:43 [7] NCCL INFO Ring 00 : 23[7] -> 19[3] via P2P/direct pointer
+rocetest-worker-0:20:43 [6] NCCL INFO Ring 00 : 6[6] -> 7[7] via P2P/direct pointer
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 00 : 30[6] -> 31[7] via P2P/direct pointer
+rocetest-worker-1:22:44 [6] NCCL INFO Ring 00 : 14[6] -> 15[7] via P2P/direct pointer
+rocetest-worker-3:20:43 [7] NCCL INFO Ring 00 : 31[7] -> 27[3] via P2P/direct pointer
+rocetest-worker-0:20:42 [5] NCCL INFO Ring 00 : 5[5] -> 4[4] via P2P/direct pointer
+rocetest-worker-2:20:37 [1] NCCL INFO Ring 00 : 17[1] -> 21[5] via P2P/direct pointer
+rocetest-worker-1:22:41 [3] NCCL INFO Ring 00 : 11 -> 18 [send] via NET/IB/0/GDRDMA
+rocetest-worker-1:22:38 [0] NCCL INFO Ring 00 : 8[0] -> 9[1] via P2P/direct pointer
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 00 : 16[0] -> 17[1] via P2P/direct pointer
+rocetest-worker-0:20:40 [3] NCCL INFO Ring 00 : 3 -> 10 [send] via NET/IB/0/GDRDMA
+rocetest-worker-3:20:37 [1] NCCL INFO Ring 00 : 25[1] -> 29[5] via P2P/direct pointer
+rocetest-worker-2:20:39 [3] NCCL INFO Ring 00 : 19 -> 26 [send] via NET/IB/0/GDRDMA
+rocetest-worker-1:22:42 [4] NCCL INFO Ring 00 : 12[4] -> 14[6] via P2P/direct pointer
+rocetest-worker-0:20:44 [7] NCCL INFO Ring 00 : 7[7] -> 3[3] via P2P/direct pointer
+rocetest-worker-3:20:41 [5] NCCL INFO Ring 00 : 29[5] -> 28[4] via P2P/direct pointer
+rocetest-worker-1:22:39 [1] NCCL INFO Ring 00 : 9[1] -> 13[5] via P2P/direct pointer
+rocetest-worker-0:20:41 [4] NCCL INFO Ring 00 : 4[4] -> 6[6] via P2P/direct pointer
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 00 : 24[0] -> 25[1] via P2P/direct pointer
+rocetest-worker-1:22:45 [7] NCCL INFO Ring 00 : 15[7] -> 11[3] via P2P/direct pointer
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 00 : 28[4] -> 30[6] via P2P/direct pointer
+rocetest-worker-3:20:39 [3] NCCL INFO Ring 00 : 27 -> 2 [send] via NET/IB/0/GDRDMA
+rocetest-worker-0:20:40 [3] NCCL INFO Ring 00 : 3[3] -> 7[7] via P2P/direct pointer
+rocetest-worker-1:22:41 [3] NCCL INFO Ring 00 : 11[3] -> 15[7] via P2P/direct pointer
+rocetest-worker-2:20:39 [3] NCCL INFO Ring 00 : 19[3] -> 23[7] via P2P/direct pointer
+rocetest-worker-0:20:38 [1] NCCL INFO Ring 00 : 1[1] -> 0[0] via P2P/direct pointer
+rocetest-worker-0:20:37 [0] NCCL INFO Ring 00 : 0[0] -> 2[2] via P2P/direct pointer
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 00 : 10 -> 18 [receive] via NET/IB/0/GDRDMA
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 00 : 20[4] -> 21[5] via P2P/direct pointer
+rocetest-worker-0:20:42 [5] NCCL INFO Ring 00 : 5[5] -> 1[1] via P2P/direct pointer
+rocetest-worker-1:22:38 [0] NCCL INFO Ring 00 : 8[0] -> 10[2] via P2P/direct pointer
+rocetest-worker-3:20:39 [3] NCCL INFO Ring 00 : 27[3] -> 31[7] via P2P/direct pointer
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 00 : 22[6] -> 20[4] via P2P/direct pointer
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 00 : 26 -> 18 [receive] via NET/IB/0/GDRDMA
+rocetest-worker-2:20:43 [7] NCCL INFO Ring 00 : 23[7] -> 22[6] via P2P/direct pointer
+rocetest-worker-0:20:44 [7] NCCL INFO Ring 00 : 7[7] -> 6[6] via P2P/direct pointer
+rocetest-worker-1:22:44 [6] NCCL INFO Ring 00 : 14[6] -> 12[4] via P2P/direct pointer
+rocetest-worker-1:22:42 [4] NCCL INFO Ring 00 : 12[4] -> 13[5] via P2P/direct pointer
+rocetest-worker-0:20:43 [6] NCCL INFO Ring 00 : 6[6] -> 4[4] via P2P/direct pointer
+rocetest-worker-3:20:43 [7] NCCL INFO Ring 00 : 31[7] -> 30[6] via P2P/direct pointer
+rocetest-worker-1:22:39 [1] NCCL INFO Ring 00 : 9[1] -> 8[0] via P2P/direct pointer
+rocetest-worker-0:20:41 [4] NCCL INFO Ring 00 : 4[4] -> 5[5] via P2P/direct pointer
+rocetest-worker-0:20:39 [2] NCCL INFO Ring 00 : 18 -> 2 [receive] via NET/IB/0/GDRDMA
+rocetest-worker-2:20:41 [5] NCCL INFO Ring 00 : 21[5] -> 17[1] via P2P/direct pointer
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 01 : 13 -> 20 [receive] via NET/IB/1/GDRDMA
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 00 : 16[0] -> 18[2] via P2P/direct pointer
+rocetest-worker-2:20:37 [1] NCCL INFO Ring 00 : 17[1] -> 16[0] via P2P/direct pointer
+rocetest-worker-1:22:43 [5] NCCL INFO Ring 00 : 13[5] -> 9[1] via P2P/direct pointer
+rocetest-worker-1:22:45 [7] NCCL INFO Ring 00 : 15[7] -> 14[6] via P2P/direct pointer
+rocetest-worker-1:22:42 [4] NCCL INFO Ring 01 : 5 -> 12 [receive] via NET/IB/1/GDRDMA
+rocetest-worker-3:20:41 [5] NCCL INFO Ring 00 : 29[5] -> 25[1] via P2P/direct pointer
+rocetest-worker-0:20:41 [4] NCCL INFO Ring 01 : 29 -> 4 [receive] via NET/IB/1/GDRDMA
+rocetest-worker-3:20:37 [1] NCCL INFO Ring 00 : 25[1] -> 24[0] via P2P/direct pointer
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 00 : 24[0] -> 26[2] via P2P/direct pointer
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 00 : 30[6] -> 28[4] via P2P/direct pointer
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 00 : 28[4] -> 29[5] via P2P/direct pointer
+rocetest-worker-1:22:40 [2] NCCL INFO Ring 00 : 10 -> 18 [send] via NET/IB/0/GDRDMA
+rocetest-worker-0:20:40 [3] NCCL INFO Ring 01 : 3[3] -> 7[7] via P2P/direct pointer
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 01 : 21 -> 28 [receive] via NET/IB/1/GDRDMA
+rocetest-worker-1:22:40 [2] NCCL INFO Ring 00 : 18 -> 10 [receive] via NET/IB/0/GDRDMA
+rocetest-worker-1:22:41 [3] NCCL INFO Ring 01 : 11[3] -> 15[7] via P2P/direct pointer
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 00 : 18 -> 2 [send] via NET/IB/0/GDRDMA
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 00 : 26 -> 18 [send] via NET/IB/0/GDRDMA
+rocetest-worker-0:20:41 [4] NCCL INFO Ring 01 : 4[4] -> 0[0] via P2P/direct pointer
+rocetest-worker-1:22:42 [4] NCCL INFO Ring 01 : 12[4] -> 8[0] via P2P/direct pointer
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 01 : 20[4] -> 16[0] via P2P/direct pointer
+rocetest-worker-1:22:38 [0] NCCL INFO Ring 01 : 8[0] -> 10[2] via P2P/direct pointer
+rocetest-worker-2:20:39 [3] NCCL INFO Ring 01 : 19[3] -> 23[7] via P2P/direct pointer
+rocetest-worker-0:20:38 [1] NCCL INFO Ring 01 : 1[1] -> 3[3] via P2P/direct pointer
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 00 : 18 -> 26 [receive] via NET/IB/0/GDRDMA
+rocetest-worker-0:20:37 [0] NCCL INFO Ring 01 : 0[0] -> 2[2] via P2P/direct pointer
+rocetest-worker-0:20:44 [7] NCCL INFO Ring 01 : 7[7] -> 6[6] via P2P/direct pointer
+rocetest-worker-1:22:39 [1] NCCL INFO Ring 01 : 9[1] -> 11[3] via P2P/direct pointer
+rocetest-worker-0:20:43 [6] NCCL INFO Ring 01 : 6[6] -> 5[5] via P2P/direct pointer
+rocetest-worker-1:22:44 [6] NCCL INFO Ring 01 : 14[6] -> 13[5] via P2P/direct pointer
+rocetest-worker-1:22:45 [7] NCCL INFO Ring 01 : 15[7] -> 14[6] via P2P/direct pointer
+rocetest-worker-0:20:42 [5] NCCL INFO Ring 01 : 5 -> 12 [send] via NET/IB/1/GDRDMA
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 01 : 28[4] -> 24[0] via P2P/direct pointer
+rocetest-worker-3:20:39 [3] NCCL INFO Ring 01 : 27[3] -> 31[7] via P2P/direct pointer
+rocetest-worker-1:22:43 [5] NCCL INFO Ring 01 : 13 -> 20 [send] via NET/IB/1/GDRDMA
+rocetest-worker-3:20:43 [7] NCCL INFO Ring 01 : 31[7] -> 30[6] via P2P/direct pointer
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 01 : 22[6] -> 21[5] via P2P/direct pointer
+rocetest-worker-2:20:43 [7] NCCL INFO Ring 01 : 23[7] -> 22[6] via P2P/direct pointer
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 00 : 2 -> 18 [receive] via NET/IB/0/GDRDMA
+rocetest-worker-0:20:39 [2] NCCL INFO Ring 00 : 2 -> 18 [send] via NET/IB/0/GDRDMA
+rocetest-worker-3:20:37 [1] NCCL INFO Ring 01 : 25[1] -> 27[3] via P2P/direct pointer
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 01 : 24[0] -> 26[2] via P2P/direct pointer
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 01 : 30[6] -> 29[5] via P2P/direct pointer
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 01 : 16[0] -> 18[2] via P2P/direct pointer
+rocetest-worker-2:20:41 [5] NCCL INFO Ring 01 : 21 -> 28 [send] via NET/IB/1/GDRDMA
+rocetest-worker-0:20:42 [5] NCCL INFO Ring 01 : 5[5] -> 6[6] via P2P/direct pointer
+rocetest-worker-0:20:40 [3] NCCL INFO Ring 01 : 3[3] -> 1[1] via P2P/direct pointer
+rocetest-worker-0:20:44 [7] NCCL INFO Ring 01 : 7[7] -> 3[3] via P2P/direct pointer
+rocetest-worker-1:22:43 [5] NCCL INFO Ring 01 : 13[5] -> 14[6] via P2P/direct pointer
+rocetest-worker-1:22:41 [3] NCCL INFO Ring 01 : 11[3] -> 9[1] via P2P/direct pointer
+rocetest-worker-2:20:37 [1] NCCL INFO Ring 01 : 17[1] -> 19[3] via P2P/direct pointer
+rocetest-worker-0:20:43 [6] NCCL INFO Ring 01 : 6[6] -> 7[7] via P2P/direct pointer
+rocetest-worker-3:20:41 [5] NCCL INFO Ring 01 : 29 -> 4 [send] via NET/IB/1/GDRDMA
+rocetest-worker-1:22:44 [6] NCCL INFO Ring 01 : 14[6] -> 15[7] via P2P/direct pointer
+rocetest-worker-1:22:45 [7] NCCL INFO Ring 01 : 15[7] -> 11[3] via P2P/direct pointer
+rocetest-worker-1:22:44 [6] NCCL INFO Ring 02 : 7 -> 14 [receive] via NET/IB/2/GDRDMA
+rocetest-worker-0:20:43 [6] NCCL INFO Ring 02 : 31 -> 6 [receive] via NET/IB/2/GDRDMA
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 00 : 18 -> 10 [send] via NET/IB/0/GDRDMA
+rocetest-worker-2:20:41 [5] NCCL INFO Ring 01 : 21[5] -> 22[6] via P2P/direct pointer
+rocetest-worker-3:20:43 [7] NCCL INFO Ring 01 : 31[7] -> 27[3] via P2P/direct pointer
+rocetest-worker-1:22:42 [4] NCCL INFO Ring 01 : 12 -> 20 [send] via NET/IB/1/GDRDMA
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 01 : 12 -> 20 [receive] via NET/IB/1/GDRDMA
+rocetest-worker-1:22:44 [6] NCCL INFO Ring 02 : 14[6] -> 10[2] via P2P/direct pointer
+rocetest-worker-3:20:41 [5] NCCL INFO Ring 01 : 29[5] -> 30[6] via P2P/direct pointer
+rocetest-worker-0:20:39 [2] NCCL INFO Ring 01 : 2[2] -> 1[1] via P2P/direct pointer
+rocetest-worker-3:20:39 [3] NCCL INFO Ring 01 : 27[3] -> 25[1] via P2P/direct pointer
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 01 : 30[6] -> 31[7] via P2P/direct pointer
+rocetest-worker-1:22:43 [5] NCCL INFO Ring 02 : 13[5] -> 15[7] via P2P/direct pointer
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 01 : 22[6] -> 23[7] via P2P/direct pointer
+rocetest-worker-2:20:43 [7] NCCL INFO Ring 01 : 23[7] -> 19[3] via P2P/direct pointer
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 01 : 28 -> 20 [receive] via NET/IB/1/GDRDMA
+rocetest-worker-1:22:45 [7] NCCL INFO Ring 02 : 15 -> 22 [send] via NET/IB/2/GDRDMA
+rocetest-worker-0:20:43 [6] NCCL INFO Ring 02 : 6[6] -> 2[2] via P2P/direct pointer
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 02 : 23 -> 30 [receive] via NET/IB/2/GDRDMA
+rocetest-worker-0:20:42 [5] NCCL INFO Ring 02 : 5[5] -> 7[7] via P2P/direct pointer
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 02 : 15 -> 22 [receive] via NET/IB/2/GDRDMA
+rocetest-worker-2:20:39 [3] NCCL INFO Ring 01 : 19[3] -> 17[1] via P2P/direct pointer
+rocetest-worker-1:22:45 [7] NCCL INFO Ring 02 : 15[7] -> 13[5] via P2P/direct pointer
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 01 : 28 -> 20 [send] via NET/IB/1/GDRDMA
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 00 : 18 -> 26 [send] via NET/IB/0/GDRDMA
+rocetest-worker-0:20:41 [4] NCCL INFO Ring 01 : 20 -> 4 [receive] via NET/IB/1/GDRDMA
+rocetest-worker-0:20:37 [0] NCCL INFO Ring 01 : 0[0] -> 4[4] via P2P/direct pointer
+rocetest-worker-0:20:44 [7] NCCL INFO Ring 02 : 7 -> 14 [send] via NET/IB/2/GDRDMA
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 02 : 30[6] -> 26[2] via P2P/direct pointer
+rocetest-worker-0:20:39 [2] NCCL INFO Ring 01 : 2[2] -> 0[0] via P2P/direct pointer
+rocetest-worker-1:22:40 [2] NCCL INFO Ring 01 : 10[2] -> 9[1] via P2P/direct pointer
+rocetest-worker-3:20:41 [5] NCCL INFO Ring 02 : 29[5] -> 31[7] via P2P/direct pointer
+rocetest-worker-0:20:38 [1] NCCL INFO Ring 01 : 1[1] -> 2[2] via P2P/direct pointer
+rocetest-worker-3:20:43 [7] NCCL INFO Ring 02 : 31 -> 6 [send] via NET/IB/2/GDRDMA
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 01 : 20 -> 4 [send] via NET/IB/1/GDRDMA
+rocetest-worker-1:22:38 [0] NCCL INFO Ring 01 : 8[0] -> 12[4] via P2P/direct pointer
+rocetest-worker-0:20:44 [7] NCCL INFO Ring 02 : 7[7] -> 5[5] via P2P/direct pointer
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 02 : 22[6] -> 18[2] via P2P/direct pointer
+rocetest-worker-2:20:41 [5] NCCL INFO Ring 02 : 21[5] -> 23[7] via P2P/direct pointer
+rocetest-worker-1:22:42 [4] NCCL INFO Ring 01 : 20 -> 12 [receive] via NET/IB/1/GDRDMA
+rocetest-worker-1:22:40 [2] NCCL INFO Ring 01 : 10[2] -> 8[0] via P2P/direct pointer
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 01 : 26[2] -> 25[1] via P2P/direct pointer
+rocetest-worker-1:22:39 [1] NCCL INFO Ring 01 : 9[1] -> 10[2] via P2P/direct pointer
+rocetest-worker-2:20:43 [7] NCCL INFO Ring 02 : 23 -> 30 [send] via NET/IB/2/GDRDMA
+rocetest-worker-3:20:43 [7] NCCL INFO Ring 02 : 31[7] -> 29[5] via P2P/direct pointer
+rocetest-worker-0:20:40 [3] NCCL INFO Ring 02 : 3[3] -> 1[1] via P2P/direct pointer
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 01 : 18[2] -> 17[1] via P2P/direct pointer
+rocetest-worker-2:20:43 [7] NCCL INFO Ring 02 : 23[7] -> 21[5] via P2P/direct pointer
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 01 : 24[0] -> 28[4] via P2P/direct pointer
+rocetest-worker-1:22:41 [3] NCCL INFO Ring 02 : 11[3] -> 9[1] via P2P/direct pointer
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 01 : 16[0] -> 20[4] via P2P/direct pointer
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 01 : 20 -> 28 [receive] via NET/IB/1/GDRDMA
+rocetest-worker-0:20:37 [0] NCCL INFO Ring 02 : 0[0] -> 4[4] via P2P/direct pointer
+rocetest-worker-1:22:38 [0] NCCL INFO Ring 02 : 8[0] -> 12[4] via P2P/direct pointer
+rocetest-worker-0:20:41 [4] NCCL INFO Ring 01 : 4 -> 20 [send] via NET/IB/1/GDRDMA
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 01 : 26[2] -> 24[0] via P2P/direct pointer
+rocetest-worker-3:20:37 [1] NCCL INFO Ring 01 : 25[1] -> 26[2] via P2P/direct pointer
+rocetest-worker-0:20:39 [2] NCCL INFO Ring 02 : 2[2] -> 3[3] via P2P/direct pointer
+rocetest-worker-0:20:38 [1] NCCL INFO Ring 02 : 1[1] -> 0[0] via P2P/direct pointer
+rocetest-worker-1:22:40 [2] NCCL INFO Ring 02 : 10[2] -> 11[3] via P2P/direct pointer
+rocetest-worker-1:22:39 [1] NCCL INFO Ring 02 : 9[1] -> 8[0] via P2P/direct pointer
+rocetest-worker-0:20:43 [6] NCCL INFO Ring 02 : 22 -> 6 [receive] via NET/IB/2/GDRDMA
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 01 : 4 -> 20 [receive] via NET/IB/1/GDRDMA
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 01 : 18[2] -> 16[0] via P2P/direct pointer
+rocetest-worker-2:20:37 [1] NCCL INFO Ring 01 : 17[1] -> 18[2] via P2P/direct pointer
+rocetest-worker-3:20:39 [3] NCCL INFO Ring 02 : 27[3] -> 25[1] via P2P/direct pointer
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 02 : 24[0] -> 28[4] via P2P/direct pointer
+rocetest-worker-0:20:39 [2] NCCL INFO Ring 02 : 2[2] -> 6[6] via P2P/direct pointer
+rocetest-worker-1:22:44 [6] NCCL INFO Ring 02 : 14 -> 22 [send] via NET/IB/2/GDRDMA
+rocetest-worker-0:20:40 [3] NCCL INFO Ring 02 : 3[3] -> 2[2] via P2P/direct pointer
+rocetest-worker-0:20:38 [1] NCCL INFO Ring 02 : 1[1] -> 3[3] via P2P/direct pointer
+rocetest-worker-1:22:41 [3] NCCL INFO Ring 02 : 11[3] -> 10[2] via P2P/direct pointer
+rocetest-worker-1:22:40 [2] NCCL INFO Ring 02 : 10[2] -> 14[6] via P2P/direct pointer
+rocetest-worker-1:22:39 [1] NCCL INFO Ring 02 : 9[1] -> 11[3] via P2P/direct pointer
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 02 : 26[2] -> 27[3] via P2P/direct pointer
+rocetest-worker-3:20:37 [1] NCCL INFO Ring 02 : 25[1] -> 24[0] via P2P/direct pointer
+rocetest-worker-2:20:39 [3] NCCL INFO Ring 02 : 19[3] -> 17[1] via P2P/direct pointer
+rocetest-worker-1:22:41 [3] NCCL INFO Ring 03 : 11[3] -> 10[2] via P2P/direct pointer
+rocetest-worker-1:22:40 [2] NCCL INFO Ring 03 : 10[2] -> 14[6] via P2P/direct pointer
+rocetest-worker-0:20:41 [4] NCCL INFO Ring 02 : 4[4] -> 5[5] via P2P/direct pointer
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 02 : 16[0] -> 20[4] via P2P/direct pointer
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 01 : 20 -> 12 [send] via NET/IB/1/GDRDMA
+rocetest-worker-0:20:39 [2] NCCL INFO Ring 03 : 2[2] -> 6[6] via P2P/direct pointer
+rocetest-worker-2:20:37 [1] NCCL INFO Ring 02 : 17[1] -> 16[0] via P2P/direct pointer
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 02 : 18[2] -> 19[3] via P2P/direct pointer
+rocetest-worker-0:20:40 [3] NCCL INFO Ring 03 : 3[3] -> 2[2] via P2P/direct pointer
+rocetest-worker-0:20:37 [0] NCCL INFO Ring 02 : 0[0] -> 1[1] via P2P/direct pointer
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 02 : 30 -> 22 [send] via NET/IB/2/GDRDMA
+rocetest-worker-3:20:39 [3] NCCL INFO Ring 02 : 27[3] -> 26[2] via P2P/direct pointer
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 02 : 26[2] -> 30[6] via P2P/direct pointer
+rocetest-worker-3:20:37 [1] NCCL INFO Ring 02 : 25[1] -> 27[3] via P2P/direct pointer
+rocetest-worker-0:20:42 [5] NCCL INFO Ring 02 : 5[5] -> 4[4] via P2P/direct pointer
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 01 : 20 -> 28 [send] via NET/IB/1/GDRDMA
+rocetest-worker-0:20:41 [4] NCCL INFO Ring 02 : 4[4] -> 0[0] via P2P/direct pointer
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 03 : 26[2] -> 30[6] via P2P/direct pointer
+rocetest-worker-3:20:39 [3] NCCL INFO Ring 03 : 27[3] -> 26[2] via P2P/direct pointer
+rocetest-worker-0:20:37 [0] NCCL INFO Ring 03 : 25 -> 0 [receive] via NET/IB/3/GDRDMA
+rocetest-worker-1:22:42 [4] NCCL INFO Ring 02 : 12[4] -> 13[5] via P2P/direct pointer
+rocetest-worker-2:20:37 [1] NCCL INFO Ring 02 : 17[1] -> 19[3] via P2P/direct pointer
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 02 : 14 -> 22 [receive] via NET/IB/2/GDRDMA
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 02 : 28[4] -> 29[5] via P2P/direct pointer
+rocetest-worker-2:20:39 [3] NCCL INFO Ring 02 : 19[3] -> 18[2] via P2P/direct pointer
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 02 : 30 -> 22 [receive] via NET/IB/2/GDRDMA
+rocetest-worker-1:22:44 [6] NCCL INFO Ring 02 : 22 -> 14 [receive] via NET/IB/2/GDRDMA
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 02 : 18[2] -> 22[6] via P2P/direct pointer
+rocetest-worker-1:22:38 [0] NCCL INFO Ring 02 : 8[0] -> 9[1] via P2P/direct pointer
+rocetest-worker-0:20:44 [7] NCCL INFO Ring 03 : 7[7] -> 5[5] via P2P/direct pointer
+rocetest-worker-0:20:38 [1] NCCL INFO Ring 03 : 1 -> 8 [send] via NET/IB/3/GDRDMA
+rocetest-worker-0:20:37 [0] NCCL INFO Ring 03 : 0[0] -> 3[3] via P2P/direct pointer
+rocetest-worker-0:20:42 [5] NCCL INFO Ring 03 : 5[5] -> 1[1] via P2P/direct pointer
+rocetest-worker-0:20:41 [4] NCCL INFO Ring 03 : 4[4] -> 7[7] via P2P/direct pointer
+rocetest-worker-1:22:43 [5] NCCL INFO Ring 02 : 13[5] -> 12[4] via P2P/direct pointer
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 02 : 24[0] -> 25[1] via P2P/direct pointer
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 02 : 22 -> 30 [receive] via NET/IB/2/GDRDMA
+rocetest-worker-1:22:42 [4] NCCL INFO Ring 02 : 12[4] -> 8[0] via P2P/direct pointer
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 02 : 28[4] -> 24[0] via P2P/direct pointer
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 02 : 22 -> 6 [send] via NET/IB/2/GDRDMA
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 02 : 20[4] -> 21[5] via P2P/direct pointer
+rocetest-worker-0:20:40 [3] NCCL INFO Ring 03 : 3[3] -> 0[0] via P2P/direct pointer
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 03 : 17 -> 24 [receive] via NET/IB/3/GDRDMA
+rocetest-worker-0:20:42 [5] NCCL INFO Ring 03 : 5[5] -> 7[7] via P2P/direct pointer
+rocetest-worker-0:20:44 [7] NCCL INFO Ring 03 : 7[7] -> 4[4] via P2P/direct pointer
+rocetest-worker-1:22:38 [0] NCCL INFO Ring 03 : 1 -> 8 [receive] via NET/IB/3/GDRDMA
+rocetest-worker-3:20:41 [5] NCCL INFO Ring 02 : 29[5] -> 28[4] via P2P/direct pointer
+rocetest-worker-1:22:45 [7] NCCL INFO Ring 03 : 15[7] -> 13[5] via P2P/direct pointer
+rocetest-worker-0:20:38 [1] NCCL INFO Ring 03 : 1[1] -> 5[5] via P2P/direct pointer
+rocetest-worker-1:22:39 [1] NCCL INFO Ring 03 : 9 -> 16 [send] via NET/IB/3/GDRDMA
+rocetest-worker-1:22:38 [0] NCCL INFO Ring 03 : 8[0] -> 11[3] via P2P/direct pointer
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 03 : 24[0] -> 27[3] via P2P/direct pointer
+rocetest-worker-0:20:43 [6] NCCL INFO Ring 02 : 6 -> 22 [send] via NET/IB/2/GDRDMA
+rocetest-worker-2:20:39 [3] NCCL INFO Ring 03 : 19[3] -> 18[2] via P2P/direct pointer
+rocetest-worker-1:22:42 [4] NCCL INFO Ring 03 : 12[4] -> 15[7] via P2P/direct pointer
+rocetest-worker-1:22:43 [5] NCCL INFO Ring 03 : 13[5] -> 9[1] via P2P/direct pointer
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 02 : 6 -> 22 [receive] via NET/IB/2/GDRDMA
+rocetest-worker-3:20:43 [7] NCCL INFO Ring 03 : 31[7] -> 29[5] via P2P/direct pointer
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 03 : 18[2] -> 22[6] via P2P/direct pointer
+rocetest-worker-0:20:42 [5] NCCL INFO Ring 04 : 5[5] -> 4[4] via P2P/direct pointer
+rocetest-worker-0:20:38 [1] NCCL INFO Ring 04 : 1[1] -> 5[5] via P2P/direct pointer
+rocetest-worker-3:20:37 [1] NCCL INFO Ring 03 : 25 -> 0 [send] via NET/IB/3/GDRDMA
+rocetest-worker-3:20:41 [5] NCCL INFO Ring 03 : 29[5] -> 25[1] via P2P/direct pointer
+rocetest-worker-1:22:41 [3] NCCL INFO Ring 03 : 11[3] -> 8[0] via P2P/direct pointer
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 03 : 28[4] -> 31[7] via P2P/direct pointer
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 02 : 16[0] -> 17[1] via P2P/direct pointer
+rocetest-worker-1:22:45 [7] NCCL INFO Ring 03 : 15[7] -> 12[4] via P2P/direct pointer
+rocetest-worker-1:22:43 [5] NCCL INFO Ring 03 : 13[5] -> 15[7] via P2P/direct pointer
+rocetest-worker-3:20:39 [3] NCCL INFO Ring 03 : 27[3] -> 24[0] via P2P/direct pointer
+rocetest-worker-1:22:38 [0] NCCL INFO Ring 03 : 8 -> 16 [send] via NET/IB/3/GDRDMA
+rocetest-worker-3:20:37 [1] NCCL INFO Ring 03 : 25[1] -> 29[5] via P2P/direct pointer
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 02 : 22 -> 14 [send] via NET/IB/2/GDRDMA
+rocetest-worker-0:20:43 [6] NCCL INFO Ring 03 : 6[6] -> 4[4] via P2P/direct pointer
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 02 : 20[4] -> 16[0] via P2P/direct pointer
+rocetest-worker-2:20:41 [5] NCCL INFO Ring 02 : 21[5] -> 20[4] via P2P/direct pointer
+rocetest-worker-3:20:41 [5] NCCL INFO Ring 03 : 29[5] -> 31[7] via P2P/direct pointer
+rocetest-worker-3:20:43 [7] NCCL INFO Ring 03 : 31[7] -> 28[4] via P2P/direct pointer
+rocetest-worker-0:20:37 [0] NCCL INFO Ring 03 : 16 -> 0 [receive] via NET/IB/3/GDRDMA
+rocetest-worker-3:20:37 [1] NCCL INFO Ring 04 : 25[1] -> 29[5] via P2P/direct pointer
+rocetest-worker-0:20:39 [2] NCCL INFO Ring 03 : 2[2] -> 3[3] via P2P/direct pointer
+rocetest-worker-3:20:41 [5] NCCL INFO Ring 04 : 29[5] -> 28[4] via P2P/direct pointer
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 03 : 9 -> 16 [receive] via NET/IB/3/GDRDMA
+rocetest-worker-0:20:41 [4] NCCL INFO Ring 03 : 4[4] -> 6[6] via P2P/direct pointer
+rocetest-worker-1:22:39 [1] NCCL INFO Ring 03 : 9[1] -> 13[5] via P2P/direct pointer
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 02 : 22 -> 30 [send] via NET/IB/2/GDRDMA
+rocetest-worker-0:20:43 [6] NCCL INFO Ring 03 : 6[6] -> 2[2] via P2P/direct pointer
+rocetest-worker-0:20:39 [2] NCCL INFO Ring 04 : 27 -> 2 [receive] via NET/IB/0/GDRDMA
+rocetest-worker-1:22:39 [1] NCCL INFO Ring 04 : 9[1] -> 13[5] via P2P/direct pointer
+rocetest-worker-1:22:43 [5] NCCL INFO Ring 04 : 13[5] -> 12[4] via P2P/direct pointer
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 03 : 30[6] -> 28[4] via P2P/direct pointer
+rocetest-worker-2:20:43 [7] NCCL INFO Ring 03 : 23[7] -> 21[5] via P2P/direct pointer
+rocetest-worker-0:20:44 [7] NCCL INFO Ring 04 : 7[7] -> 3[3] via P2P/direct pointer
+rocetest-worker-1:22:44 [6] NCCL INFO Ring 03 : 14[6] -> 12[4] via P2P/direct pointer
+rocetest-worker-2:20:37 [1] NCCL INFO Ring 03 : 17 -> 24 [send] via NET/IB/3/GDRDMA
+rocetest-worker-0:20:39 [2] NCCL INFO Ring 04 : 2[2] -> 0[0] via P2P/direct pointer
+rocetest-worker-0:20:40 [3] NCCL INFO Ring 04 : 3 -> 10 [send] via NET/IB/0/GDRDMA
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 03 : 16[0] -> 19[3] via P2P/direct pointer
+rocetest-worker-0:20:41 [4] NCCL INFO Ring 04 : 4[4] -> 6[6] via P2P/direct pointer
+rocetest-worker-1:22:40 [2] NCCL INFO Ring 03 : 10[2] -> 11[3] via P2P/direct pointer
+rocetest-worker-0:20:43 [6] NCCL INFO Ring 04 : 6[6] -> 7[7] via P2P/direct pointer
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 03 : 26[2] -> 27[3] via P2P/direct pointer
+rocetest-worker-1:22:44 [6] NCCL INFO Ring 03 : 14[6] -> 10[2] via P2P/direct pointer
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 03 : 20[4] -> 23[7] via P2P/direct pointer
+rocetest-worker-2:20:41 [5] NCCL INFO Ring 03 : 21[5] -> 17[1] via P2P/direct pointer
+rocetest-worker-0:20:42 [5] NCCL INFO Ring 04 : 5[5] -> 1[1] via P2P/direct pointer
+rocetest-worker-1:22:42 [4] NCCL INFO Ring 03 : 12[4] -> 14[6] via P2P/direct pointer
+rocetest-worker-1:22:40 [2] NCCL INFO Ring 04 : 3 -> 10 [receive] via NET/IB/0/GDRDMA
+rocetest-worker-0:20:41 [4] NCCL INFO Ring 04 : 4[4] -> 5[5] via P2P/direct pointer
+rocetest-worker-1:22:45 [7] NCCL INFO Ring 04 : 15[7] -> 11[3] via P2P/direct pointer
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 03 : 28[4] -> 30[6] via P2P/direct pointer
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 03 : 30[6] -> 26[2] via P2P/direct pointer
+rocetest-worker-0:20:43 [6] NCCL INFO Ring 04 : 6[6] -> 4[4] via P2P/direct pointer
+rocetest-worker-0:20:44 [7] NCCL INFO Ring 04 : 7[7] -> 6[6] via P2P/direct pointer
+rocetest-worker-0:20:40 [3] NCCL INFO Ring 04 : 3[3] -> 7[7] via P2P/direct pointer
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 04 : 19 -> 26 [receive] via NET/IB/0/GDRDMA
+rocetest-worker-1:22:40 [2] NCCL INFO Ring 04 : 10[2] -> 8[0] via P2P/direct pointer
+rocetest-worker-2:20:37 [1] NCCL INFO Ring 03 : 17[1] -> 21[5] via P2P/direct pointer
+rocetest-worker-0:20:41 [4] NCCL INFO Ring 05 : 29 -> 4 [receive] via NET/IB/1/GDRDMA
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 03 : 22[6] -> 20[4] via P2P/direct pointer
+rocetest-worker-2:20:39 [3] NCCL INFO Ring 03 : 19[3] -> 16[0] via P2P/direct pointer
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 03 : 8 -> 16 [receive] via NET/IB/3/GDRDMA
+rocetest-worker-1:22:41 [3] NCCL INFO Ring 04 : 11 -> 18 [send] via NET/IB/0/GDRDMA
+rocetest-worker-0:20:41 [4] NCCL INFO Ring 05 : 4[4] -> 0[0] via P2P/direct pointer
+rocetest-worker-0:20:43 [6] NCCL INFO Ring 05 : 6[6] -> 5[5] via P2P/direct pointer
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 03 : 24 -> 16 [send] via NET/IB/3/GDRDMA
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 03 : 24 -> 16 [receive] via NET/IB/3/GDRDMA
+rocetest-worker-1:22:44 [6] NCCL INFO Ring 04 : 14[6] -> 15[7] via P2P/direct pointer
+rocetest-worker-1:22:38 [0] NCCL INFO Ring 03 : 16 -> 8 [receive] via NET/IB/3/GDRDMA
+rocetest-worker-1:22:42 [4] NCCL INFO Ring 04 : 12[4] -> 14[6] via P2P/direct pointer
+rocetest-worker-0:20:40 [3] NCCL INFO Ring 05 : 3[3] -> 7[7] via P2P/direct pointer
+rocetest-worker-0:20:44 [7] NCCL INFO Ring 05 : 7[7] -> 6[6] via P2P/direct pointer
+rocetest-worker-3:20:43 [7] NCCL INFO Ring 04 : 31[7] -> 27[3] via P2P/direct pointer
+rocetest-worker-0:20:44 [7] NCCL INFO Ring 05 : 7[7] -> 3[3] via P2P/direct pointer
+rocetest-worker-2:20:41 [5] NCCL INFO Ring 03 : 21[5] -> 23[7] via P2P/direct pointer
+rocetest-worker-2:20:43 [7] NCCL INFO Ring 03 : 23[7] -> 20[4] via P2P/direct pointer
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 03 : 16 -> 24 [receive] via NET/IB/3/GDRDMA
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 04 : 26[2] -> 24[0] via P2P/direct pointer
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 03 : 18[2] -> 19[3] via P2P/direct pointer
+rocetest-worker-1:22:43 [5] NCCL INFO Ring 04 : 13[5] -> 9[1] via P2P/direct pointer
+rocetest-worker-1:22:44 [6] NCCL INFO Ring 04 : 14[6] -> 12[4] via P2P/direct pointer
+rocetest-worker-1:22:45 [7] NCCL INFO Ring 04 : 15[7] -> 14[6] via P2P/direct pointer
+rocetest-worker-1:22:42 [4] NCCL INFO Ring 04 : 12[4] -> 13[5] via P2P/direct pointer
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 04 : 28[4] -> 30[6] via P2P/direct pointer
+rocetest-worker-3:20:39 [3] NCCL INFO Ring 04 : 27 -> 2 [send] via NET/IB/0/GDRDMA
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 04 : 30[6] -> 31[7] via P2P/direct pointer
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 03 : 16 -> 0 [send] via NET/IB/3/GDRDMA
+rocetest-worker-1:22:42 [4] NCCL INFO Ring 05 : 5 -> 12 [receive] via NET/IB/1/GDRDMA
+rocetest-worker-1:22:42 [4] NCCL INFO Ring 05 : 12[4] -> 8[0] via P2P/direct pointer
+rocetest-worker-1:22:44 [6] NCCL INFO Ring 05 : 14[6] -> 13[5] via P2P/direct pointer
+rocetest-worker-3:20:41 [5] NCCL INFO Ring 04 : 29[5] -> 25[1] via P2P/direct pointer
+rocetest-worker-0:20:37 [0] NCCL INFO Ring 03 : 0 -> 16 [send] via NET/IB/3/GDRDMA
+rocetest-worker-3:20:39 [3] NCCL INFO Ring 04 : 27[3] -> 31[7] via P2P/direct pointer
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 03 : 20[4] -> 22[6] via P2P/direct pointer
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 04 : 28[4] -> 29[5] via P2P/direct pointer
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 03 : 22[6] -> 18[2] via P2P/direct pointer
+rocetest-worker-3:20:43 [7] NCCL INFO Ring 04 : 31[7] -> 30[6] via P2P/direct pointer
+rocetest-worker-2:20:37 [1] NCCL INFO Ring 04 : 17[1] -> 21[5] via P2P/direct pointer
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 04 : 30[6] -> 28[4] via P2P/direct pointer
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 03 : 0 -> 16 [receive] via NET/IB/3/GDRDMA
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 05 : 21 -> 28 [receive] via NET/IB/1/GDRDMA
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 04 : 11 -> 18 [receive] via NET/IB/0/GDRDMA
+rocetest-worker-2:20:41 [5] NCCL INFO Ring 04 : 21[5] -> 20[4] via P2P/direct pointer
+rocetest-worker-1:22:41 [3] NCCL INFO Ring 04 : 11[3] -> 15[7] via P2P/direct pointer
+rocetest-worker-3:20:39 [3] NCCL INFO Ring 05 : 27[3] -> 31[7] via P2P/direct pointer
+rocetest-worker-0:20:37 [0] NCCL INFO Ring 04 : 0[0] -> 1[1] via P2P/direct pointer
+rocetest-worker-2:20:43 [7] NCCL INFO Ring 04 : 23[7] -> 19[3] via P2P/direct pointer
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 05 : 28[4] -> 24[0] via P2P/direct pointer
+rocetest-worker-3:20:43 [7] NCCL INFO Ring 05 : 31[7] -> 30[6] via P2P/direct pointer
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 05 : 30[6] -> 29[5] via P2P/direct pointer
+rocetest-worker-1:22:41 [3] NCCL INFO Ring 05 : 11[3] -> 15[7] via P2P/direct pointer
+rocetest-worker-1:22:45 [7] NCCL INFO Ring 05 : 15[7] -> 14[6] via P2P/direct pointer
+rocetest-worker-3:20:43 [7] NCCL INFO Ring 05 : 31[7] -> 27[3] via P2P/direct pointer
+rocetest-worker-1:22:45 [7] NCCL INFO Ring 05 : 15[7] -> 11[3] via P2P/direct pointer
+rocetest-worker-2:20:39 [3] NCCL INFO Ring 04 : 19 -> 26 [send] via NET/IB/0/GDRDMA
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 04 : 18[2] -> 16[0] via P2P/direct pointer
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 04 : 20[4] -> 22[6] via P2P/direct pointer
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 03 : 16 -> 8 [send] via NET/IB/3/GDRDMA
+rocetest-worker-0:20:37 [0] NCCL INFO Ring 04 : 0[0] -> 2[2] via P2P/direct pointer
+rocetest-worker-0:20:38 [1] NCCL INFO Ring 04 : 1[1] -> 0[0] via P2P/direct pointer
+rocetest-worker-0:20:39 [2] NCCL INFO Ring 04 : 2 -> 26 [send] via NET/IB/0/GDRDMA
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 04 : 22[6] -> 23[7] via P2P/direct pointer
+rocetest-worker-2:20:39 [3] NCCL INFO Ring 04 : 19[3] -> 23[7] via P2P/direct pointer
+rocetest-worker-2:20:41 [5] NCCL INFO Ring 04 : 21[5] -> 17[1] via P2P/direct pointer
+rocetest-worker-0:20:42 [5] NCCL INFO Ring 05 : 5 -> 12 [send] via NET/IB/1/GDRDMA
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 03 : 16 -> 24 [send] via NET/IB/3/GDRDMA
+rocetest-worker-0:20:43 [6] NCCL INFO Ring 05 : 6[6] -> 7[7] via P2P/direct pointer
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 04 : 20[4] -> 21[5] via P2P/direct pointer
+rocetest-worker-0:20:37 [0] NCCL INFO Ring 05 : 0[0] -> 2[2] via P2P/direct pointer
+rocetest-worker-0:20:38 [1] NCCL INFO Ring 05 : 1[1] -> 3[3] via P2P/direct pointer
+rocetest-worker-0:20:42 [5] NCCL INFO Ring 05 : 5[5] -> 6[6] via P2P/direct pointer
+rocetest-worker-0:20:43 [6] NCCL INFO Ring 06 : 31 -> 6 [receive] via NET/IB/2/GDRDMA
+rocetest-worker-1:22:38 [0] NCCL INFO Ring 04 : 8[0] -> 9[1] via P2P/direct pointer
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 04 : 22[6] -> 20[4] via P2P/direct pointer
+rocetest-worker-2:20:43 [7] NCCL INFO Ring 04 : 23[7] -> 22[6] via P2P/direct pointer
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 04 : 24[0] -> 25[1] via P2P/direct pointer
+rocetest-worker-0:20:40 [3] NCCL INFO Ring 05 : 3[3] -> 1[1] via P2P/direct pointer
+rocetest-worker-0:20:43 [6] NCCL INFO Ring 06 : 6[6] -> 2[2] via P2P/direct pointer
+rocetest-worker-0:20:42 [5] NCCL INFO Ring 06 : 5[5] -> 7[7] via P2P/direct pointer
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 05 : 13 -> 20 [receive] via NET/IB/1/GDRDMA
+rocetest-worker-0:20:44 [7] NCCL INFO Ring 06 : 7 -> 14 [send] via NET/IB/2/GDRDMA
+rocetest-worker-1:22:40 [2] NCCL INFO Ring 04 : 26 -> 10 [receive] via NET/IB/0/GDRDMA
+rocetest-worker-1:22:38 [0] NCCL INFO Ring 04 : 8[0] -> 10[2] via P2P/direct pointer
+rocetest-worker-1:22:39 [1] NCCL INFO Ring 04 : 9[1] -> 8[0] via P2P/direct pointer
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 04 : 18 -> 26 [receive] via NET/IB/0/GDRDMA
+rocetest-worker-2:20:39 [3] NCCL INFO Ring 05 : 19[3] -> 23[7] via P2P/direct pointer
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 04 : 2 -> 26 [receive] via NET/IB/0/GDRDMA
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 04 : 24[0] -> 26[2] via P2P/direct pointer
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 04 : 16[0] -> 17[1] via P2P/direct pointer
+rocetest-worker-3:20:37 [1] NCCL INFO Ring 04 : 25[1] -> 24[0] via P2P/direct pointer
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 05 : 20[4] -> 16[0] via P2P/direct pointer
+rocetest-worker-0:20:39 [2] NCCL INFO Ring 04 : 26 -> 2 [receive] via NET/IB/0/GDRDMA
+rocetest-worker-2:20:43 [7] NCCL INFO Ring 05 : 23[7] -> 22[6] via P2P/direct pointer
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 05 : 22[6] -> 21[5] via P2P/direct pointer
+rocetest-worker-1:22:43 [5] NCCL INFO Ring 05 : 13 -> 20 [send] via NET/IB/1/GDRDMA
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 04 : 26 -> 10 [send] via NET/IB/0/GDRDMA
+rocetest-worker-1:22:44 [6] NCCL INFO Ring 05 : 14[6] -> 15[7] via P2P/direct pointer
+rocetest-worker-1:22:38 [0] NCCL INFO Ring 05 : 8[0] -> 10[2] via P2P/direct pointer
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 04 : 18 -> 26 [send] via NET/IB/0/GDRDMA
+rocetest-worker-1:22:39 [1] NCCL INFO Ring 05 : 9[1] -> 11[3] via P2P/direct pointer
+rocetest-worker-1:22:43 [5] NCCL INFO Ring 05 : 13[5] -> 14[6] via P2P/direct pointer
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 04 : 16[0] -> 18[2] via P2P/direct pointer
+rocetest-worker-2:20:37 [1] NCCL INFO Ring 04 : 17[1] -> 16[0] via P2P/direct pointer
+rocetest-worker-3:20:41 [5] NCCL INFO Ring 05 : 29 -> 4 [send] via NET/IB/1/GDRDMA
+rocetest-worker-2:20:43 [7] NCCL INFO Ring 05 : 23[7] -> 19[3] via P2P/direct pointer
+rocetest-worker-1:22:42 [4] NCCL INFO Ring 05 : 28 -> 12 [receive] via NET/IB/1/GDRDMA
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 04 : 26 -> 18 [receive] via NET/IB/0/GDRDMA
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 05 : 30[6] -> 31[7] via P2P/direct pointer
+rocetest-worker-1:22:44 [6] NCCL INFO Ring 06 : 7 -> 14 [receive] via NET/IB/2/GDRDMA
+rocetest-worker-1:22:40 [2] NCCL INFO Ring 04 : 10 -> 26 [send] via NET/IB/0/GDRDMA
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 04 : 10 -> 26 [receive] via NET/IB/0/GDRDMA
+rocetest-worker-3:20:37 [1] NCCL INFO Ring 05 : 25[1] -> 27[3] via P2P/direct pointer
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 05 : 24[0] -> 26[2] via P2P/direct pointer
+rocetest-worker-0:20:44 [7] NCCL INFO Ring 06 : 7[7] -> 5[5] via P2P/direct pointer
+rocetest-worker-3:20:41 [5] NCCL INFO Ring 05 : 29[5] -> 30[6] via P2P/direct pointer
+rocetest-worker-0:20:41 [4] NCCL INFO Ring 05 : 4 -> 28 [send] via NET/IB/1/GDRDMA
+rocetest-worker-1:22:41 [3] NCCL INFO Ring 05 : 11[3] -> 9[1] via P2P/direct pointer
+rocetest-worker-2:20:41 [5] NCCL INFO Ring 05 : 21 -> 28 [send] via NET/IB/1/GDRDMA
+rocetest-worker-1:22:44 [6] NCCL INFO Ring 06 : 14[6] -> 10[2] via P2P/direct pointer
+rocetest-worker-1:22:43 [5] NCCL INFO Ring 06 : 13[5] -> 15[7] via P2P/direct pointer
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 06 : 23 -> 30 [receive] via NET/IB/2/GDRDMA
+rocetest-worker-2:20:37 [1] NCCL INFO Ring 05 : 17[1] -> 19[3] via P2P/direct pointer
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 05 : 22[6] -> 23[7] via P2P/direct pointer
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 05 : 16[0] -> 18[2] via P2P/direct pointer
+rocetest-worker-1:22:40 [2] NCCL INFO Ring 05 : 10[2] -> 9[1] via P2P/direct pointer
+rocetest-worker-1:22:45 [7] NCCL INFO Ring 06 : 15 -> 22 [send] via NET/IB/2/GDRDMA
+rocetest-worker-2:20:41 [5] NCCL INFO Ring 05 : 21[5] -> 22[6] via P2P/direct pointer
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 04 : 26 -> 18 [send] via NET/IB/0/GDRDMA
+rocetest-worker-1:22:38 [0] NCCL INFO Ring 05 : 8[0] -> 12[4] via P2P/direct pointer
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 06 : 15 -> 22 [receive] via NET/IB/2/GDRDMA
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 06 : 30[6] -> 26[2] via P2P/direct pointer
+rocetest-worker-2:20:39 [3] NCCL INFO Ring 05 : 19[3] -> 17[1] via P2P/direct pointer
+rocetest-worker-1:22:40 [2] NCCL INFO Ring 05 : 10[2] -> 8[0] via P2P/direct pointer
+rocetest-worker-3:20:39 [3] NCCL INFO Ring 05 : 27[3] -> 25[1] via P2P/direct pointer
+rocetest-worker-1:22:39 [1] NCCL INFO Ring 05 : 9[1] -> 10[2] via P2P/direct pointer
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 05 : 20 -> 28 [send] via NET/IB/1/GDRDMA
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 06 : 22[6] -> 18[2] via P2P/direct pointer
+rocetest-worker-3:20:41 [5] NCCL INFO Ring 06 : 29[5] -> 31[7] via P2P/direct pointer
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 05 : 20 -> 28 [receive] via NET/IB/1/GDRDMA
+rocetest-worker-1:22:45 [7] NCCL INFO Ring 06 : 15[7] -> 13[5] via P2P/direct pointer
+rocetest-worker-2:20:41 [5] NCCL INFO Ring 06 : 21[5] -> 23[7] via P2P/direct pointer
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 04 : 26 -> 2 [send] via NET/IB/0/GDRDMA
+rocetest-worker-1:22:41 [3] NCCL INFO Ring 06 : 11[3] -> 9[1] via P2P/direct pointer
+rocetest-worker-2:20:43 [7] NCCL INFO Ring 06 : 23 -> 30 [send] via NET/IB/2/GDRDMA
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 05 : 4 -> 28 [receive] via NET/IB/1/GDRDMA
+rocetest-worker-2:20:43 [7] NCCL INFO Ring 06 : 23[7] -> 21[5] via P2P/direct pointer
+rocetest-worker-1:22:38 [0] NCCL INFO Ring 06 : 8[0] -> 12[4] via P2P/direct pointer
+rocetest-worker-1:22:40 [2] NCCL INFO Ring 06 : 10[2] -> 11[3] via P2P/direct pointer
+rocetest-worker-1:22:39 [1] NCCL INFO Ring 06 : 9[1] -> 8[0] via P2P/direct pointer
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 05 : 18[2] -> 17[1] via P2P/direct pointer
+rocetest-worker-3:20:43 [7] NCCL INFO Ring 06 : 31 -> 6 [send] via NET/IB/2/GDRDMA
+rocetest-worker-0:20:39 [2] NCCL INFO Ring 05 : 2[2] -> 1[1] via P2P/direct pointer
+rocetest-worker-1:22:44 [6] NCCL INFO Ring 06 : 30 -> 14 [receive] via NET/IB/2/GDRDMA
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 05 : 16[0] -> 20[4] via P2P/direct pointer
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 05 : 28 -> 12 [send] via NET/IB/1/GDRDMA
+rocetest-worker-0:20:37 [0] NCCL INFO Ring 05 : 0[0] -> 4[4] via P2P/direct pointer
+rocetest-worker-3:20:43 [7] NCCL INFO Ring 06 : 31[7] -> 29[5] via P2P/direct pointer
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 05 : 28 -> 20 [receive] via NET/IB/1/GDRDMA
+rocetest-worker-2:20:37 [1] NCCL INFO Ring 05 : 17[1] -> 18[2] via P2P/direct pointer
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 05 : 26[2] -> 25[1] via P2P/direct pointer
+rocetest-worker-0:20:41 [4] NCCL INFO Ring 05 : 28 -> 4 [receive] via NET/IB/1/GDRDMA
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 05 : 18[2] -> 16[0] via P2P/direct pointer
+rocetest-worker-0:20:39 [2] NCCL INFO Ring 05 : 2[2] -> 0[0] via P2P/direct pointer
+rocetest-worker-0:20:38 [1] NCCL INFO Ring 05 : 1[1] -> 2[2] via P2P/direct pointer
+rocetest-worker-1:22:40 [2] NCCL INFO Ring 06 : 10[2] -> 14[6] via P2P/direct pointer
+rocetest-worker-1:22:41 [3] NCCL INFO Ring 06 : 11[3] -> 10[2] via P2P/direct pointer
+rocetest-worker-1:22:39 [1] NCCL INFO Ring 06 : 9[1] -> 11[3] via P2P/direct pointer
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 05 : 24[0] -> 28[4] via P2P/direct pointer
+rocetest-worker-2:20:39 [3] NCCL INFO Ring 06 : 19[3] -> 17[1] via P2P/direct pointer
+rocetest-worker-1:22:42 [4] NCCL INFO Ring 05 : 12 -> 28 [send] via NET/IB/1/GDRDMA
+rocetest-worker-0:20:40 [3] NCCL INFO Ring 06 : 3[3] -> 1[1] via P2P/direct pointer
+rocetest-worker-1:22:40 [2] NCCL INFO Ring 07 : 10[2] -> 14[6] via P2P/direct pointer
+rocetest-worker-1:22:41 [3] NCCL INFO Ring 07 : 11[3] -> 10[2] via P2P/direct pointer
+rocetest-worker-2:20:37 [1] NCCL INFO Ring 06 : 17[1] -> 16[0] via P2P/direct pointer
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 06 : 16[0] -> 20[4] via P2P/direct pointer
+rocetest-worker-0:20:37 [0] NCCL INFO Ring 06 : 0[0] -> 4[4] via P2P/direct pointer
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 06 : 18[2] -> 19[3] via P2P/direct pointer
+rocetest-worker-0:20:39 [2] NCCL INFO Ring 06 : 2[2] -> 3[3] via P2P/direct pointer
+rocetest-worker-0:20:38 [1] NCCL INFO Ring 06 : 1[1] -> 0[0] via P2P/direct pointer
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 05 : 12 -> 28 [receive] via NET/IB/1/GDRDMA
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 05 : 26[2] -> 24[0] via P2P/direct pointer
+rocetest-worker-3:20:37 [1] NCCL INFO Ring 05 : 25[1] -> 26[2] via P2P/direct pointer
+rocetest-worker-1:22:42 [4] NCCL INFO Ring 06 : 12[4] -> 13[5] via P2P/direct pointer
+rocetest-worker-2:20:37 [1] NCCL INFO Ring 06 : 17[1] -> 19[3] via P2P/direct pointer
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 06 : 22 -> 30 [send] via NET/IB/2/GDRDMA
+rocetest-worker-2:20:39 [3] NCCL INFO Ring 06 : 19[3] -> 18[2] via P2P/direct pointer
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 06 : 18[2] -> 22[6] via P2P/direct pointer
+rocetest-worker-1:22:38 [0] NCCL INFO Ring 06 : 8[0] -> 9[1] via P2P/direct pointer
+rocetest-worker-0:20:43 [6] NCCL INFO Ring 06 : 6 -> 30 [send] via NET/IB/2/GDRDMA
+rocetest-worker-3:20:39 [3] NCCL INFO Ring 06 : 27[3] -> 25[1] via P2P/direct pointer
+rocetest-worker-0:20:40 [3] NCCL INFO Ring 06 : 3[3] -> 2[2] via P2P/direct pointer
+rocetest-worker-0:20:39 [2] NCCL INFO Ring 06 : 2[2] -> 6[6] via P2P/direct pointer
+rocetest-worker-0:20:38 [1] NCCL INFO Ring 06 : 1[1] -> 3[3] via P2P/direct pointer
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 07 : 18[2] -> 22[6] via P2P/direct pointer
+rocetest-worker-2:20:39 [3] NCCL INFO Ring 07 : 19[3] -> 18[2] via P2P/direct pointer
+rocetest-worker-1:22:43 [5] NCCL INFO Ring 06 : 13[5] -> 12[4] via P2P/direct pointer
+rocetest-worker-1:22:42 [4] NCCL INFO Ring 06 : 12[4] -> 8[0] via P2P/direct pointer
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 05 : 28 -> 20 [send] via NET/IB/1/GDRDMA
+rocetest-worker-0:20:40 [3] NCCL INFO Ring 07 : 3[3] -> 2[2] via P2P/direct pointer
+rocetest-worker-0:20:39 [2] NCCL INFO Ring 07 : 2[2] -> 6[6] via P2P/direct pointer
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 06 : 24[0] -> 28[4] via P2P/direct pointer
+rocetest-worker-1:22:38 [0] NCCL INFO Ring 07 : 1 -> 8 [receive] via NET/IB/3/GDRDMA
+rocetest-worker-3:20:37 [1] NCCL INFO Ring 06 : 25[1] -> 24[0] via P2P/direct pointer
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 06 : 26[2] -> 27[3] via P2P/direct pointer
+rocetest-worker-1:22:45 [7] NCCL INFO Ring 07 : 15[7] -> 13[5] via P2P/direct pointer
+rocetest-worker-1:22:38 [0] NCCL INFO Ring 07 : 8[0] -> 11[3] via P2P/direct pointer
+rocetest-worker-1:22:39 [1] NCCL INFO Ring 07 : 9 -> 16 [send] via NET/IB/3/GDRDMA
+rocetest-worker-1:22:43 [5] NCCL INFO Ring 07 : 13[5] -> 9[1] via P2P/direct pointer
+rocetest-worker-1:22:42 [4] NCCL INFO Ring 07 : 12[4] -> 15[7] via P2P/direct pointer
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 05 : 28 -> 4 [send] via NET/IB/1/GDRDMA
+rocetest-worker-1:22:41 [3] NCCL INFO Ring 07 : 11[3] -> 8[0] via P2P/direct pointer
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 06 : 22 -> 30 [receive] via NET/IB/2/GDRDMA
+rocetest-worker-1:22:43 [5] NCCL INFO Ring 07 : 13[5] -> 15[7] via P2P/direct pointer
+rocetest-worker-1:22:45 [7] NCCL INFO Ring 07 : 15[7] -> 12[4] via P2P/direct pointer
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 06 : 20[4] -> 21[5] via P2P/direct pointer
+rocetest-worker-0:20:41 [4] NCCL INFO Ring 06 : 4[4] -> 5[5] via P2P/direct pointer
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 06 : 30 -> 22 [receive] via NET/IB/2/GDRDMA
+rocetest-worker-0:20:37 [0] NCCL INFO Ring 06 : 0[0] -> 1[1] via P2P/direct pointer
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 06 : 6 -> 30 [receive] via NET/IB/2/GDRDMA
+rocetest-worker-3:20:37 [1] NCCL INFO Ring 06 : 25[1] -> 27[3] via P2P/direct pointer
+rocetest-worker-3:20:39 [3] NCCL INFO Ring 06 : 27[3] -> 26[2] via P2P/direct pointer
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 06 : 26[2] -> 30[6] via P2P/direct pointer
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 06 : 16[0] -> 17[1] via P2P/direct pointer
+rocetest-worker-2:20:41 [5] NCCL INFO Ring 06 : 21[5] -> 20[4] via P2P/direct pointer
+rocetest-worker-0:20:43 [6] NCCL INFO Ring 06 : 30 -> 6 [receive] via NET/IB/2/GDRDMA
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 06 : 20[4] -> 16[0] via P2P/direct pointer
+rocetest-worker-0:20:41 [4] NCCL INFO Ring 06 : 4[4] -> 0[0] via P2P/direct pointer
+rocetest-worker-0:20:42 [5] NCCL INFO Ring 06 : 5[5] -> 4[4] via P2P/direct pointer
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 07 : 9 -> 16 [receive] via NET/IB/3/GDRDMA
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 06 : 30 -> 14 [send] via NET/IB/2/GDRDMA
+rocetest-worker-0:20:37 [0] NCCL INFO Ring 07 : 25 -> 0 [receive] via NET/IB/3/GDRDMA
+rocetest-worker-2:20:43 [7] NCCL INFO Ring 07 : 23[7] -> 21[5] via P2P/direct pointer
+rocetest-worker-0:20:44 [7] NCCL INFO Ring 07 : 7[7] -> 5[5] via P2P/direct pointer
+rocetest-worker-1:22:39 [1] NCCL INFO Ring 07 : 9[1] -> 13[5] via P2P/direct pointer
+rocetest-worker-1:22:39 [1] NCCL INFO Trees [0] 8->9->13/-1/-1 [1] 10->9->11/-1/-1 [2] 11->9->8/-1/-1 [3] 13->9->-1/-1/-1 [4] 8->9->13/-1/-1 [5] 10->9->11/-1/-1 [6] 11->9->8/-1/-1 [7] 13->9->-1/-1/-1
+rocetest-worker-1:22:43 [5] NCCL INFO Trees [0] 9->13->12/-1/-1 [1] 14->13->-1/-1/-1 [2] 12->13->15/-1/-1 [3] 15->13->9/-1/-1 [4] 9->13->12/-1/-1 [5] 14->13->-1/-1/-1 [6] 12->13->15/-1/-1 [7] 15->13->9/-1/-1
+rocetest-worker-1:22:44 [6] NCCL INFO Ring 06 : 14 -> 30 [send] via NET/IB/2/GDRDMA
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 07 : 16[0] -> 19[3] via P2P/direct pointer
+rocetest-worker-2:20:37 [1] NCCL INFO Ring 07 : 17 -> 24 [send] via NET/IB/3/GDRDMA
+rocetest-worker-2:20:41 [5] NCCL INFO Ring 07 : 21[5] -> 17[1] via P2P/direct pointer
+rocetest-worker-0:20:37 [0] NCCL INFO Ring 07 : 0[0] -> 3[3] via P2P/direct pointer
+rocetest-worker-0:20:38 [1] NCCL INFO Ring 07 : 1 -> 8 [send] via NET/IB/3/GDRDMA
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 06 : 28[4] -> 29[5] via P2P/direct pointer
+rocetest-worker-0:20:42 [5] NCCL INFO Ring 07 : 5[5] -> 1[1] via P2P/direct pointer
+rocetest-worker-0:20:41 [4] NCCL INFO Ring 07 : 4[4] -> 7[7] via P2P/direct pointer
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 07 : 20[4] -> 23[7] via P2P/direct pointer
+rocetest-worker-3:20:39 [3] NCCL INFO Ring 07 : 27[3] -> 26[2] via P2P/direct pointer
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 07 : 26[2] -> 30[6] via P2P/direct pointer
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 06 : 14 -> 30 [receive] via NET/IB/2/GDRDMA
+rocetest-worker-0:20:38 [1] NCCL INFO Ring 07 : 1[1] -> 5[5] via P2P/direct pointer
+rocetest-worker-1:22:38 [0] NCCL INFO Ring 07 : 24 -> 8 [receive] via NET/IB/3/GDRDMA
+rocetest-worker-0:20:38 [1] NCCL INFO Trees [0] 0->1->5/-1/-1 [1] 2->1->3/-1/-1 [2] 3->1->0/-1/-1 [3] 5->1->-1/-1/-1 [4] 0->1->5/-1/-1 [5] 2->1->3/-1/-1 [6] 3->1->0/-1/-1 [7] 5->1->-1/-1/-1
+rocetest-worker-0:20:40 [3] NCCL INFO Ring 07 : 3[3] -> 0[0] via P2P/direct pointer
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 06 : 24[0] -> 25[1] via P2P/direct pointer
+rocetest-worker-0:20:42 [5] NCCL INFO Ring 07 : 5[5] -> 7[7] via P2P/direct pointer
+rocetest-worker-0:20:42 [5] NCCL INFO Trees [0] 1->5->4/-1/-1 [1] 6->5->-1/-1/-1 [2] 4->5->7/-1/-1 [3] 7->5->1/-1/-1 [4] 1->5->4/-1/-1 [5] 6->5->-1/-1/-1 [6] 4->5->7/-1/-1 [7] 7->5->1/-1/-1
+rocetest-worker-0:20:44 [7] NCCL INFO Ring 07 : 7[7] -> 4[4] via P2P/direct pointer
+rocetest-worker-1:22:44 [6] NCCL INFO Ring 07 : 14[6] -> 12[4] via P2P/direct pointer
+rocetest-worker-2:20:39 [3] NCCL INFO Ring 07 : 19[3] -> 16[0] via P2P/direct pointer
+rocetest-worker-2:20:41 [5] NCCL INFO Ring 07 : 21[5] -> 23[7] via P2P/direct pointer
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 06 : 30 -> 22 [send] via NET/IB/2/GDRDMA
+rocetest-worker-2:20:43 [7] NCCL INFO Ring 07 : 23[7] -> 20[4] via P2P/direct pointer
+rocetest-worker-1:22:40 [2] NCCL INFO Ring 07 : 10[2] -> 11[3] via P2P/direct pointer
+rocetest-worker-1:22:45 [7] NCCL INFO Trees [0] 14->15->11/-1/-1 [1] 11->15->14/-1/-1 [2] 13->15->-1/-1/-1 [3] 12->15->13/-1/-1 [4] 14->15->11/-1/-1 [5] 11->15->14/-1/-1 [6] 13->15->-1/-1/-1 [7] 12->15->13/-1/-1
+rocetest-worker-1:22:41 [3] NCCL INFO Trees [0] 15->11->-1/-1/-1 [1] 9->11->15/-1/-1 [2] 10->11->9/-1/-1 [3] 8->11->10/-1/-1 [4] 15->11->-1/-1/-1 [5] 9->11->15/-1/-1 [6] 10->11->9/-1/-1 [7] 8->11->10/-1/-1
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 07 : 16 -> 24 [send] via NET/IB/3/GDRDMA
+rocetest-worker-1:22:42 [4] NCCL INFO Ring 07 : 12[4] -> 14[6] via P2P/direct pointer
+rocetest-worker-1:22:42 [4] NCCL INFO Trees [0] 13->12->14/-1/-1 [1] 20->12->8/-1/-1 [2] 8->12->13/-1/-1 [3] 14->12->15/-1/-1 [4] 13->12->14/-1/-1 [5] -1->12->8/28/-1 [6] 8->12->13/-1/-1 [7] 14->12->15/-1/-1
+rocetest-worker-1:22:44 [6] NCCL INFO Ring 07 : 14[6] -> 10[2] via P2P/direct pointer
+rocetest-worker-1:22:44 [6] NCCL INFO Trees [0] 12->14->15/-1/-1 [1] 15->14->13/-1/-1 [2] 22->14->10/-1/-1 [3] 10->14->12/-1/-1 [4] 12->14->15/-1/-1 [5] 15->14->13/-1/-1 [6] -1->14->10/30/-1 [7] 10->14->12/-1/-1
+rocetest-worker-1:22:40 [2] NCCL INFO Trees [0] 18->10->8/-1/-1 [1] 8->10->9/-1/-1 [2] 14->10->11/-1/-1 [3] 11->10->14/-1/-1 [4] -1->10->8/26/-1 [5] 8->10->9/-1/-1 [6] 14->10->11/-1/-1 [7] 11->10->14/-1/-1
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 06 : 28[4] -> 24[0] via P2P/direct pointer
+rocetest-worker-3:20:41 [5] NCCL INFO Ring 06 : 29[5] -> 28[4] via P2P/direct pointer
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 07 : 17 -> 24 [receive] via NET/IB/3/GDRDMA
+rocetest-worker-2:20:37 [1] NCCL INFO Ring 07 : 17[1] -> 21[5] via P2P/direct pointer
+rocetest-worker-2:20:41 [5] NCCL INFO Trees [0] 17->21->20/-1/-1 [1] 22->21->-1/-1/-1 [2] 20->21->23/-1/-1 [3] 23->21->17/-1/-1 [4] 17->21->20/-1/-1 [5] 22->21->-1/-1/-1 [6] 20->21->23/-1/-1 [7] 23->21->17/-1/-1
+rocetest-worker-2:20:37 [1] NCCL INFO Trees [0] 16->17->21/-1/-1 [1] 18->17->19/-1/-1 [2] 19->17->16/-1/-1 [3] 21->17->-1/-1/-1 [4] 16->17->21/-1/-1 [5] 18->17->19/-1/-1 [6] 19->17->16/-1/-1 [7] 21->17->-1/-1/-1
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 06 : 30 -> 6 [send] via NET/IB/2/GDRDMA
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 07 : 22[6] -> 20[4] via P2P/direct pointer
+rocetest-worker-0:20:43 [6] NCCL INFO Ring 07 : 6[6] -> 4[4] via P2P/direct pointer
+rocetest-worker-3:20:43 [7] NCCL INFO Ring 07 : 31[7] -> 29[5] via P2P/direct pointer
+rocetest-worker-2:20:38 [2] NCCL INFO Ring 07 : 18[2] -> 19[3] via P2P/direct pointer
+rocetest-worker-2:20:43 [7] NCCL INFO Trees [0] 22->23->19/-1/-1 [1] 19->23->22/-1/-1 [2] 21->23->-1/-1/-1 [3] 20->23->21/-1/-1 [4] 22->23->19/-1/-1 [5] 19->23->22/-1/-1 [6] 21->23->-1/-1/-1 [7] 20->23->21/-1/-1
+rocetest-worker-2:20:39 [3] NCCL INFO Trees [0] 23->19->-1/-1/-1 [1] 17->19->23/-1/-1 [2] 18->19->17/-1/-1 [3] 16->19->18/-1/-1 [4] 23->19->-1/-1/-1 [5] 17->19->23/-1/-1 [6] 18->19->17/-1/-1 [7] 16->19->18/-1/-1
+rocetest-worker-0:20:39 [2] NCCL INFO Ring 07 : 2[2] -> 3[3] via P2P/direct pointer
+rocetest-worker-0:20:44 [7] NCCL INFO Trees [0] 6->7->3/-1/-1 [1] 3->7->6/-1/-1 [2] 5->7->-1/-1/-1 [3] 4->7->5/-1/-1 [4] 6->7->3/-1/-1 [5] 3->7->6/-1/-1 [6] 5->7->-1/-1/-1 [7] 4->7->5/-1/-1
+rocetest-worker-2:20:42 [6] NCCL INFO Ring 07 : 22[6] -> 18[2] via P2P/direct pointer
+rocetest-worker-2:20:38 [2] NCCL INFO Trees [0] 2->18->16/10/26 [1] 16->18->17/-1/-1 [2] 22->18->19/-1/-1 [3] 19->18->22/-1/-1 [4] 26->18->16/-1/-1 [5] 16->18->17/-1/-1 [6] 22->18->19/-1/-1 [7] 19->18->22/-1/-1
+rocetest-worker-2:20:40 [4] NCCL INFO Ring 07 : 20[4] -> 22[6] via P2P/direct pointer
+rocetest-worker-2:20:42 [6] NCCL INFO Trees [0] 20->22->23/-1/-1 [1] 23->22->21/-1/-1 [2] 6->22->18/14/30 [3] 18->22->20/-1/-1 [4] 20->22->23/-1/-1 [5] 23->22->21/-1/-1 [6] 30->22->18/-1/-1 [7] 18->22->20/-1/-1
+rocetest-worker-2:20:40 [4] NCCL INFO Trees [0] 21->20->22/-1/-1 [1] 4->20->16/12/28 [2] 16->20->21/-1/-1 [3] 22->20->23/-1/-1 [4] 21->20->22/-1/-1 [5] 28->20->16/-1/-1 [6] 16->20->21/-1/-1 [7] 22->20->23/-1/-1
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 07 : 24[0] -> 27[3] via P2P/direct pointer
+rocetest-worker-3:20:37 [1] NCCL INFO Ring 07 : 25 -> 0 [send] via NET/IB/3/GDRDMA
+rocetest-worker-0:20:41 [4] NCCL INFO Ring 07 : 4[4] -> 6[6] via P2P/direct pointer
+rocetest-worker-0:20:41 [4] NCCL INFO Trees [0] 5->4->6/-1/-1 [1] -1->4->0/20/-1 [2] 0->4->5/-1/-1 [3] 6->4->7/-1/-1 [4] 5->4->6/-1/-1 [5] 28->4->0/-1/-1 [6] 0->4->5/-1/-1 [7] 6->4->7/-1/-1
+rocetest-worker-0:20:43 [6] NCCL INFO Ring 07 : 6[6] -> 2[2] via P2P/direct pointer
+rocetest-worker-0:20:43 [6] NCCL INFO Trees [0] 4->6->7/-1/-1 [1] 7->6->5/-1/-1 [2] -1->6->2/22/-1 [3] 2->6->4/-1/-1 [4] 4->6->7/-1/-1 [5] 7->6->5/-1/-1 [6] 30->6->2/-1/-1 [7] 2->6->4/-1/-1
+rocetest-worker-0:20:39 [2] NCCL INFO Trees [0] -1->2->0/18/-1 [1] 0->2->1/-1/-1 [2] 6->2->3/-1/-1 [3] 3->2->6/-1/-1 [4] 26->2->0/-1/-1 [5] 0->2->1/-1/-1 [6] 6->2->3/-1/-1 [7] 3->2->6/-1/-1
+rocetest-worker-0:20:40 [3] NCCL INFO Trees [0] 7->3->-1/-1/-1 [1] 1->3->7/-1/-1 [2] 2->3->1/-1/-1 [3] 0->3->2/-1/-1 [4] 7->3->-1/-1/-1 [5] 1->3->7/-1/-1 [6] 2->3->1/-1/-1 [7] 0->3->2/-1/-1
+rocetest-worker-3:20:41 [5] NCCL INFO Ring 07 : 29[5] -> 25[1] via P2P/direct pointer
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 07 : 28[4] -> 31[7] via P2P/direct pointer
+rocetest-worker-0:20:37 [0] NCCL INFO Ring 07 : 0 -> 24 [send] via NET/IB/3/GDRDMA
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 07 : 16 -> 24 [receive] via NET/IB/3/GDRDMA
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 07 : 30[6] -> 28[4] via P2P/direct pointer
+rocetest-worker-3:20:37 [1] NCCL INFO Ring 07 : 25[1] -> 29[5] via P2P/direct pointer
+rocetest-worker-3:20:37 [1] NCCL INFO Trees [0] 24->25->29/-1/-1 [1] 26->25->27/-1/-1 [2] 27->25->24/-1/-1 [3] 29->25->-1/-1/-1 [4] 24->25->29/-1/-1 [5] 26->25->27/-1/-1 [6] 27->25->24/-1/-1 [7] 29->25->-1/-1/-1
+rocetest-worker-2:20:36 [0] NCCL INFO Ring 07 : 24 -> 16 [receive] via NET/IB/3/GDRDMA
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 07 : 0 -> 24 [receive] via NET/IB/3/GDRDMA
+rocetest-worker-3:20:39 [3] NCCL INFO Ring 07 : 27[3] -> 24[0] via P2P/direct pointer
+rocetest-worker-0:20:37 [0] NCCL INFO Ring 07 : 24 -> 0 [receive] via NET/IB/3/GDRDMA
+rocetest-worker-3:20:41 [5] NCCL INFO Ring 07 : 29[5] -> 31[7] via P2P/direct pointer
+rocetest-worker-3:20:41 [5] NCCL INFO Trees [0] 25->29->28/-1/-1 [1] 30->29->-1/-1/-1 [2] 28->29->31/-1/-1 [3] 31->29->25/-1/-1 [4] 25->29->28/-1/-1 [5] 30->29->-1/-1/-1 [6] 28->29->31/-1/-1 [7] 31->29->25/-1/-1
+rocetest-worker-3:20:38 [2] NCCL INFO Ring 07 : 26[2] -> 27[3] via P2P/direct pointer
+rocetest-worker-3:20:39 [3] NCCL INFO Trees [0] 31->27->-1/-1/-1 [1] 25->27->31/-1/-1 [2] 26->27->25/-1/-1 [3] 24->27->26/-1/-1 [4] 31->27->-1/-1/-1 [5] 25->27->31/-1/-1 [6] 26->27->25/-1/-1 [7] 24->27->26/-1/-1
+rocetest-worker-3:20:43 [7] NCCL INFO Ring 07 : 31[7] -> 28[4] via P2P/direct pointer
+rocetest-worker-3:20:43 [7] NCCL INFO Trees [0] 30->31->27/-1/-1 [1] 27->31->30/-1/-1 [2] 29->31->-1/-1/-1 [3] 28->31->29/-1/-1 [4] 30->31->27/-1/-1 [5] 27->31->30/-1/-1 [6] 29->31->-1/-1/-1 [7] 28->31->29/-1/-1
+rocetest-worker-3:20:40 [4] NCCL INFO Ring 07 : 28[4] -> 30[6] via P2P/direct pointer
+rocetest-worker-3:20:42 [6] NCCL INFO Ring 07 : 30[6] -> 26[2] via P2P/direct pointer
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 07 : 24 -> 8 [send] via NET/IB/3/GDRDMA
+rocetest-worker-3:20:40 [4] NCCL INFO Trees [0] 29->28->30/-1/-1 [1] 20->28->24/-1/-1 [2] 24->28->29/-1/-1 [3] 30->28->31/-1/-1 [4] 29->28->30/-1/-1 [5] 12->28->24/20/4 [6] 24->28->29/-1/-1 [7] 30->28->31/-1/-1
+rocetest-worker-3:20:42 [6] NCCL INFO Trees [0] 28->30->31/-1/-1 [1] 31->30->29/-1/-1 [2] 22->30->26/-1/-1 [3] 26->30->28/-1/-1 [4] 28->30->31/-1/-1 [5] 31->30->29/-1/-1 [6] 14->30->26/22/6 [7] 26->30->28/-1/-1
+rocetest-worker-3:20:38 [2] NCCL INFO Trees [0] 18->26->24/-1/-1 [1] 24->26->25/-1/-1 [2] 30->26->27/-1/-1 [3] 27->26->30/-1/-1 [4] 10->26->24/18/2 [5] 24->26->25/-1/-1 [6] 30->26->27/-1/-1 [7] 27->26->30/-1/-1
+rocetest-worker-1:22:38 [0] NCCL INFO Ring 07 : 8 -> 24 [send] via NET/IB/3/GDRDMA
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 07 : 8 -> 24 [receive] via NET/IB/3/GDRDMA
+rocetest-worker-1:22:38 [0] NCCL INFO Trees [0] 10->8->9/-1/-1 [1] 12->8->10/-1/-1 [2] 9->8->12/-1/-1 [3] 16->8->11/-1/-1 [4] 10->8->9/-1/-1 [5] 12->8->10/-1/-1 [6] 9->8->12/-1/-1 [7] -1->8->11/24/-1
+rocetest-worker-1:22:44 [6] NCCL INFO comm 0x7f6790000dd0 rank 14 nranks 32 cudaDev 6 nvmlDev 6 - Init COMPLETE
+rocetest-worker-1:22:39 [1] NCCL INFO comm 0x7f67b0000dd0 rank 9 nranks 32 cudaDev 1 nvmlDev 1 - Init COMPLETE
+rocetest-worker-1:22:40 [2] NCCL INFO comm 0x7f67a8000dd0 rank 10 nranks 32 cudaDev 2 nvmlDev 2 - Init COMPLETE
+rocetest-worker-1:22:43 [5] NCCL INFO comm 0x7f6794000dd0 rank 13 nranks 32 cudaDev 5 nvmlDev 5 - Init COMPLETE
+rocetest-worker-1:22:42 [4] NCCL INFO comm 0x7f679c000dd0 rank 12 nranks 32 cudaDev 4 nvmlDev 4 - Init COMPLETE
+rocetest-worker-1:22:41 [3] NCCL INFO comm 0x7f67a0000dd0 rank 11 nranks 32 cudaDev 3 nvmlDev 3 - Init COMPLETE
+rocetest-worker-1:22:38 [0] NCCL INFO comm 0x7f67b8002360 rank 8 nranks 32 cudaDev 0 nvmlDev 0 - Init COMPLETE
+rocetest-worker-1:22:45 [7] NCCL INFO comm 0x7f6788000dd0 rank 15 nranks 32 cudaDev 7 nvmlDev 7 - Init COMPLETE
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 07 : 24 -> 16 [send] via NET/IB/3/GDRDMA
+rocetest-worker-3:20:36 [0] NCCL INFO Ring 07 : 24 -> 0 [send] via NET/IB/3/GDRDMA
+rocetest-worker-2:20:36 [0] NCCL INFO Trees [0] 18->16->17/-1/-1 [1] 20->16->18/-1/-1 [2] 17->16->20/-1/-1 [3] 0->16->19/8/24 [4] 18->16->17/-1/-1 [5] 20->16->18/-1/-1 [6] 17->16->20/-1/-1 [7] 24->16->19/-1/-1
+rocetest-worker-2:20:36 [0] NCCL INFO comm 0x7fc090002360 rank 16 nranks 32 cudaDev 0 nvmlDev 0 - Init COMPLETE
+rocetest-worker-2:20:37 [1] NCCL INFO comm 0x7fc088000dd0 rank 17 nranks 32 cudaDev 1 nvmlDev 1 - Init COMPLETE
+rocetest-worker-2:20:38 [2] NCCL INFO comm 0x7fc080000dd0 rank 18 nranks 32 cudaDev 2 nvmlDev 2 - Init COMPLETE
+rocetest-worker-2:20:42 [6] NCCL INFO comm 0x7fc068000dd0 rank 22 nranks 32 cudaDev 6 nvmlDev 6 - Init COMPLETE
+rocetest-worker-2:20:39 [3] NCCL INFO comm 0x7fc078000dd0 rank 19 nranks 32 cudaDev 3 nvmlDev 3 - Init COMPLETE
+rocetest-worker-2:20:43 [7] NCCL INFO comm 0x7fc060000dd0 rank 23 nranks 32 cudaDev 7 nvmlDev 7 - Init COMPLETE
+rocetest-worker-2:20:41 [5] NCCL INFO comm 0x7fc06c000dd0 rank 21 nranks 32 cudaDev 5 nvmlDev 5 - Init COMPLETE
+rocetest-worker-2:20:40 [4] NCCL INFO comm 0x7fc074000dd0 rank 20 nranks 32 cudaDev 4 nvmlDev 4 - Init COMPLETE
+rocetest-worker-0:20:37 [0] NCCL INFO Trees [0] 2->0->1/-1/-1 [1] 4->0->2/-1/-1 [2] 1->0->4/-1/-1 [3] -1->0->3/16/-1 [4] 2->0->1/-1/-1 [5] 4->0->2/-1/-1 [6] 1->0->4/-1/-1 [7] 24->0->3/-1/-1
+rocetest-worker-0:20:37 [0] NCCL INFO Using 256 threads, Min Comp Cap 7, Trees enabled up to size 15360000
+rocetest-worker-0:20:37 [0] NCCL INFO comm 0x7fbdd4002360 rank 0 nranks 32 cudaDev 0 nvmlDev 0 - Init COMPLETE
+rocetest-worker-0:20:42 [5] NCCL INFO comm 0x7fbdb0000dd0 rank 5 nranks 32 cudaDev 5 nvmlDev 5 - Init COMPLETE
+rocetest-worker-0:20:40 [3] NCCL INFO comm 0x7fbdbc000dd0 rank 3 nranks 32 cudaDev 3 nvmlDev 3 - Init COMPLETE
+rocetest-worker-0:20:38 [1] NCCL INFO comm 0x7fbdcc000dd0 rank 1 nranks 32 cudaDev 1 nvmlDev 1 - Init COMPLETE
+rocetest-worker-0:20:39 [2] NCCL INFO comm 0x7fbdc4000dd0 rank 2 nranks 32 cudaDev 2 nvmlDev 2 - Init COMPLETE
+rocetest-worker-0:20:41 [4] NCCL INFO comm 0x7fbdb8000dd0 rank 4 nranks 32 cudaDev 4 nvmlDev 4 - Init COMPLETE
+rocetest-worker-0:20:44 [7] NCCL INFO comm 0x7fbda4000dd0 rank 7 nranks 32 cudaDev 7 nvmlDev 7 - Init COMPLETE
+rocetest-worker-0:20:43 [6] NCCL INFO comm 0x7fbdac000dd0 rank 6 nranks 32 cudaDev 6 nvmlDev 6 - Init COMPLETE
+rocetest-worker-3:20:36 [0] NCCL INFO Trees [0] 26->24->25/-1/-1 [1] 28->24->26/-1/-1 [2] 25->24->28/-1/-1 [3] 16->24->27/-1/-1 [4] 26->24->25/-1/-1 [5] 28->24->26/-1/-1 [6] 25->24->28/-1/-1 [7] 8->24->27/16/0
+rocetest-worker-3:20:37 [1] NCCL INFO comm 0x7fe014000dd0 rank 25 nranks 32 cudaDev 1 nvmlDev 1 - Init COMPLETE
+rocetest-worker-3:20:38 [2] NCCL INFO comm 0x7fe00c000dd0 rank 26 nranks 32 cudaDev 2 nvmlDev 2 - Init COMPLETE
+#
+#                                                     out-of-place                       in-place          
+#       size         count    type   redop     time   algbw   busbw  error     time   algbw   busbw  error
+#        (B)    (elements)                     (us)  (GB/s)  (GB/s)            (us)  (GB/s)  (GB/s)       
+rocetest-worker-3:20:40 [4] NCCL INFO comm 0x7fe000000dd0 rank 28 nranks 32 cudaDev 4 nvmlDev 4 - Init COMPLETE
+rocetest-worker-0:20:20 [0] NCCL INFO Launch mode Group/CGMD
+rocetest-worker-3:20:39 [3] NCCL INFO comm 0x7fe004000dd0 rank 27 nranks 32 cudaDev 3 nvmlDev 3 - Init COMPLETE
+rocetest-worker-3:20:36 [0] NCCL INFO comm 0x7fe01c002360 rank 24 nranks 32 cudaDev 0 nvmlDev 0 - Init COMPLETE
+rocetest-worker-3:20:43 [7] NCCL INFO comm 0x7fdfec000dd0 rank 31 nranks 32 cudaDev 7 nvmlDev 7 - Init COMPLETE
+rocetest-worker-3:20:42 [6] NCCL INFO comm 0x7fdff4000dd0 rank 30 nranks 32 cudaDev 6 nvmlDev 6 - Init COMPLETE
+rocetest-worker-3:20:41 [5] NCCL INFO comm 0x7fdff8000dd0 rank 29 nranks 32 cudaDev 5 nvmlDev 5 - Init COMPLETE
+    67108864      16777216   float     sum   3293.1   20.38   39.48  1e-06   3289.0   20.40   39.53  1e-06
+   134217728      33554432   float     sum   5889.8   22.79   44.15  1e-06   5801.6   23.13   44.82  1e-06
+   268435456      67108864   float     sum    11306   23.74   46.00  1e-06    11383   23.58   45.69  1e-06
+   536870912     134217728   float     sum    22246   24.13   46.76  1e-06    22157   24.23   46.95  1e-06
+  1073741824     268435456   float     sum    44251   24.26   47.01  1e-06    44264   24.26   47.00  1e-06
+# Out of bounds values : 0 OK
+# Avg bus bandwidth    : 44.7398 
+#

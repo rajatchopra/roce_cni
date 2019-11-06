@@ -13,7 +13,7 @@ spec:
             k8s.v1.cni.cncf.io/networks: "sriov-net1,sriov-net2,sriov-net3,sriov-net4"
         spec:
           containers:
-          - image: swating/nccl_tests:horovod-v1
+          - image: rajatchopra/horovod_test:latest
             imagePullPolicy: Always
             name: rocetest
             #command: ["/bin/bash", "-c", "mpirun --allow-run-as-root --mca plm_rsh_no_tree_spawn 1 -n 4 --pernode /nccl-tests-master/build/all_reduce_perf -b 8 -e 128M -f 2 -g 8 -c 0"]
@@ -47,7 +47,7 @@ spec:
             k8s.v1.cni.cncf.io/networks: "sriov-net1,sriov-net2,sriov-net3,sriov-net4"
         spec:
           containers:
-          - image: swating/nccl_tests:horovod-v1
+          - image: rajatchopra/horovod_test:latest
             imagePullPolicy: Always
             #- image: stg.nvcr.io/ooxy7dyak7dq/multinode_nccl_tests:0.01 
             name: rocetest

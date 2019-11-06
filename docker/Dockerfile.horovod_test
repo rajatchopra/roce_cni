@@ -112,6 +112,13 @@ RUN git clone https://github.com/NVIDIA/nccl-tests.git && \
     make MPI=1 && \
     cp ./build/* /usr/local/bin/
 
+# Build NCCL
+WORKDIR "/opt"
+RUN git clone https://github.com/NVIDIA/nccl.git && \
+        cd /opt/nccl && \
+        make -j src.build
+ENV LD_LIBRARY_PATH /opt/nccl/build/lib/:$LD_LIBRARY_PATH
+
 # Download examples
 RUN apt-get install -y --no-install-recommends subversion && \
     svn checkout https://github.com/horovod/horovod/trunk/examples && \
