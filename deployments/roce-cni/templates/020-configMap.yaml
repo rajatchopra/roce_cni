@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sriovdp-config
+  namespace: kube-system
+data:
+  config.json: |
+    {
+        "resourceList": [
+            {
+                "resourceName": "mlnx_sriov_rdma1",
+                "isRdma": true,
+                "selectors": {
+                    "pfNames": ["enp5s0#0-0"]
+                }
+            },
+            {
+                "resourceName": "mlnx_sriov_rdma2",
+                "isRdma": true,
+                "selectors": {
+                    "pfNames": ["enp12s0#0-0"]
+                }
+            },
+            {
+                "resourceName": "mlnx_sriov_rdma3",
+                "isRdma": true,
+                "selectors": {
+                    "pfNames": ["enp132s0#0-0"]
+                }
+            },
+            {
+                "resourceName": "mlnx_sriov_rdma4",
+                "isRdma": true,
+                "selectors": {
+                    "pfNames": ["enp139s0#0-0"]
+                }
+            }
+        ]
+    }
